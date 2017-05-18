@@ -1,0 +1,248 @@
+<html>
+    <head>
+        <meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=0">
+        <meta charset="UTF-8">
+        <meta http-equiv="Cache-Control" content="no-siteapp" />
+        <link rel="alternate" media="handheld" />
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+        <title>Huafa Education Recruitment</title>
+        <link rel="Shortcut Icon" href="#">
+        <link rel="stylesheet" type="text/css" href="css/style.css" />
+        <link rel="stylesheet" type="text/css" href="css/external.min.css"/>
+        <link rel="stylesheet" type="text/css" href="css/popup.css" />
+        <script type="text/javascript">
+            var youdao_conv_id = 271546;
+            var ctx = "h";
+        </script>
+    </head>
+    <body>
+        <div id="body">
+            {% include "./header.app.view.html" %}
+            <div id="container">
+                <div id="sidebar">
+                    <div class="mainNavs">
+                        {% for vo in positionGroup %}
+                            <div class="menu_box">
+                                <div class="menu_main">
+                                    <h2>{{vo.jobType}}<span></span></h2>
+                                    {% for v in vo.value %}
+                                    {% endfor %}
+                                </div>
+                                <div class="menu_sub dn">
+                                    <dl class="reset">
+                                        {% for v in vo.value %}
+                                            <dd>
+                                                <a href="/index?name={{v.name}}">{{v.name}}</a>
+                                            </dd>
+                                        {% endfor %}
+                                    </dl>
+                                </div>
+                            </div>
+                        {% endfor %}
+                    </div>
+                </div>
+                <div class="content">
+                    <!--搜索框 开始-->
+                    <div id="search_box">
+                        <form name="searchForm" action="/index" method="get" id="searchform">
+                            <ul id="searchType">
+                                <img src="../../../images/search.png" width="30px" height="30px">
+                            </ul>
+                            <input type="text" id="search_input" name = "name"  tabindex="1" value=""  placeholder="请输入职位名称"  />
+                            <input type="submit" id="search_button" value="搜索" />
+                        </form>
+                    </div>
+                    <dl class="hotSearch"></dl>
+                    <div class="breakline"></div>
+
+                    <ul class="reset hotabbing" id="check_position">
+                        <li {% if conditionHot %} class="current"{% endif %} onclick="javascript:location.href='/'">热门职位</li>
+                        <li {% if conditionNew %} class="current"{% endif %} onclick="javascript:location.href='/?index=1'">最新职位</li>
+                    </ul>
+
+                    <div id="hotList">
+                        <ul class="hot_pos reset">
+                            {% for vo in positions %}
+                                <li class="odd clearfix">
+                                    <div class="hot_pos_l">
+                                        <div class="mb10">
+                                            <a href="/job/{{vo._id}}" target="_blank">{{vo.name}}</a>&nbsp;
+                                            <span class="c9">{{vo.city}}</span>
+                                        </div>
+                                        <span><em class="c7">月薪：</em>
+                                            {% if vo.negotiable %}
+                                            面议
+                                            {% else %}
+                                                {{vo.salaryLow}}k-{{vo.salaryHigh}}k
+                                            {% endif %}
+                                        </span>
+                                        <span><em class="c7">经验：</em> {{vo.experience}}</span>
+                                        <span><em class="c7">学历： </em>{{vo.certificate}}</span>
+                                        <br />
+                                        <span>发布时间：{{vo.updated}}</span>
+                                        <span>
+                                            {% if vo.welfare.length>0 %}
+                                            <ul class="companyTags reset">
+                                            {% for wel in vo.welfare %}
+                                                <li>{{wel}}</li>
+                                            {% endfor %}
+                                            </ul>
+                                        {% endif %}
+                                        </span>
+                                        <br />
+                                    </div>
+                                    <div class="hot_pos_r">
+                                        <div class="mb10 recompany">
+                                            {% if vo.companyInfo._id %}
+                                                <a href="/showCompany/{{vo.companyInfo._id}}" target="_blank">{{vo.workAddr}}</a>
+                                            {% else %}
+                                                <div style="font-size: 16px">{{vo.workAddr}}</div>
+                                            {% endif %}
+                                        </div>
+                                        <span>
+                                        {% if vo.companyInfo.scale %}
+	                                    <em class="c7">
+	                                        单位规模：
+	                                    </em>
+	                                    {{vo.companyInfo.scale}}
+                                        {% endif %}
+	                                    </span>
+                                        <br/>
+                                        {% if vo.companyInfo.address %}
+                                        <span>
+	                                    <em class="c7">
+	                                        单位地址：
+	                                    </em>
+	                                    {{vo.companyInfo.address}}
+	                                    </span>
+                                        {% endif %}
+                                        <br/>
+                                        {% if vo.companyInfo.tele %}
+                                        <span>
+	                                    <em class="c7">
+	                                        单位电话：
+	                                    </em>
+	                                    {{vo.companyInfo.tele}}
+	                                    </span>
+                                        {% endif %}
+                                    </div>
+                                </li>
+                            {% endfor %}
+                            <a href="/index" class="btn fr" target="_blank">查看更多</a>
+                        </ul>
+                        <ul class="hot_pos reset dn">
+                            <foreach name="newjob" item="vo" >
+                                <li class="odd clearfix">
+                                    <div class="hot_pos_l">
+                                        <div class="mb10">
+                                            <a href="/job/{{vo._id}}" target="_blank">{{vo.name}}</a>&nbsp;
+                                            <span class="c9">{{vo.city}}</span>
+                                        </div>
+                                        <span><em class="c7">月薪：</em>
+                                            {% if vo.negotiable %}
+                                            面议
+                                            {% else %}
+                                                {{vo.salaryLow}}k-{{vo.salaryHigh}}k
+                                            {% endif %}
+                                        </span>
+                                        <span><em class="c7">经验：</em> {{vo.experience}}</span>
+                                        <span><em class="c7">学历： </em>{{vo.certificate}}</span>
+                                        <br />
+                                        <span>发布时间：{{vo.updated}}</span>
+                                        <span>
+                                            {% if vo.welfare.length>0 %}
+                                            <ul class="companyTags reset">
+                                            {% for wel in vo.welfare %}
+                                                <li>{{wel}}</li>
+                                            {% endfor %}
+                                            </ul>
+                                        {% endif %}
+                                        </span>
+                                        <br />
+                                    </div>
+                                    <div class="hot_pos_r">
+                                        <div class="mb10 recompany">
+                                            <a href="/showCompany/{{vo.companyInfo._id}}" target="_blank">{{vo.workAddr}}</a>
+                                        </div>
+                                        <span>
+                                        {% if vo.companyInfo.scale %}
+	                                    <em class="c7">
+	                                        单位规模：
+	                                    </em>
+	                                    {{vo.companyInfo.scale}}
+                                        {% endif %}
+	                                    </span>
+                                        <br/>
+                                        {% if vo.companyInfo.address %}
+                                        <span>
+	                                    <em class="c7">
+	                                        单位地址：
+	                                    </em>
+	                                    {{vo.companyInfo.address}}
+	                                    </span>
+                                        {% endif %}
+                                        <br/>
+                                        {% if vo.companyInfo.tele %}
+                                        <span>
+	                                    <em class="c7">
+	                                        单位电话：
+	                                    </em>
+	                                    {{vo.companyInfo.tele}}
+	                                    </span>
+                                        {% endif %}
+                                    </div>
+                                </li>
+                            </foreach>
+                            <a href="/index" class="btn fr" target="_blank">查看更多</a>
+                        </ul>
+                    </div>
+                    <div class="clear"></div>
+                </div>
+                <div class="clear"></div>
+                <input type="hidden" id="resubmitToken" value="" />
+                <a id="backtop" title="回到顶部" rel="nofollow"></a>
+            </div>
+        </div>
+        <div id="footer">
+            <div class="wrapper">
+                <a href="http://www.zhhfedu.com/" target="_blank" rel="nofollow">
+                    联系我们
+                </a>
+                <a class="footer_qr" href="javascript:void(0)" rel="nofollow">
+                    微信二维码
+                    <i>
+                    </i>
+                </a>
+                <a href="http://www.rhschool.cn/xxb/NewsList.aspx?colid=133" target="_blank" rel="nofollow">
+                    珠海容闳学校招聘网
+                </a>
+                <div class="copyright">
+                    <a target="_blank" href="#">
+                        <!--京ICP备-->
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        <script type="text/javascript" src="javascripts/additional-methods.js"></script>
+        <script type="text/javascript" src="javascripts/home.min.js"></script>
+        <script type="text/javascript" src="javascripts/Chart.min.js" ></script>
+        <script type="text/javascript" src="javascripts/excanvas.js" ></script>
+        <script type="text/javascript" src="javascripts/conv.js"></script>
+        <script type="text/javascript" src="javascripts/search.min.js" ></script>
+        <script type="text/javascript" src="javascripts/core.min.js"></script>
+        <script type="text/javascript" src="javascripts/popup.min.js" ></script>
+    </body>
+
+    <script>
+        $(function(){
+//            $('#check_position').children().click(function(){
+//                top.location.href = '/?index=1'
+//            });
+            $('#workplaceSelect').children('dd').children('a').click(function (){
+                $('#addressInput').val($(this).html());
+                $('#searchform').submit();
+            });
+        })
+    </script>
+</html>

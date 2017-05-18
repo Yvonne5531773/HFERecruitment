@@ -1,0 +1,188 @@
+<html>
+<head>
+	<meta charset="UTF-8">
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+	<title>Huafa Education Recruitment</title>
+	<link rel="Shortcut Icon" href="#">
+	<link rel="stylesheet" type="text/css" href="../../../css/style.css" />
+	<link rel="stylesheet" type="text/css" href="../../../lib/font-awesome/css/font-awesome.min.css" />
+</head>
+<body>
+
+<div id="previewWrapper">
+	<div class="preview_header">
+		<h1 title="{{resume.resumename}}的简历">{{resume.resumename}}的简历</h1>
+	</div>
+
+	<div class="preview_content">
+		<div id="basicInfo" class="profile_box">
+			<h2>基本信息</h2>
+			<div class="basicShow">
+                   <span>
+					   <span class="fa fa-user"></span>
+						<span ng-if="resume.name"> {{resume.name}} </span>
+						<span ng-if="resume.gender"> | {{resume.gender}}</span>
+						<span ng-if="resume.nation"> | {{resume.nation}}</span>
+						<span ng-if="resume.birthed"> | {{resume.birthed}}</span>
+						<span ng-if="resume.politic"> | {{resume.politic}}</span>
+						<span ng-if="resume.weight"> | {{resume.weight}}cm</span>
+						<span ng-if="resume.height"> | {{resume.height}}kg</span>
+						<span ng-if="resume.married"> | {{resume.married}}</span>
+						<span ng-if="resume.child"> | {{resume.child}}</span><br>
+						<span class="fa fa-phone"></span>
+						<span ng-if="resume.phone"> {{resume.phone}}</span>
+						<span class="fa fa-envelope"></span>
+						<span ng-if="resume.email">{{resume.email}}</span>
+						<span ng-if="resume.health"> | {{resume.health}}(身体状况)</span><br>
+						<span class="fa fa-credit-card"></span>
+						<span ng-if="resume.idCard">{{resume.idCard}}(身份证)</span>
+						<span ng-if="resume.experience==='应届毕业生'">| {{resume.experience}}</span>
+						<span ng-if="resume.experience!=='应届毕业生'">| {{resume.experience}}工作经验</span><br>
+						<span class="fa fa-home"></span>
+						<span ng-if="resume.address">{{resume.address}}(通讯地址)</span>
+						<span ng-if="resume.workunit"> | {{resume.workunit}}(现工作单位)</span>
+						<span ng-if="resume.post"> | {{resume.post}}(职务)</span><br>
+						<span class="fa fa-map-marker"></span>
+						<span ng-if="resume.origin">{{resume.origin}}(籍贯)</span>
+						<span ng-if="resume.domicile"> | {{resume.domicile}}(现户籍地)</span>
+						<span ng-if="resume.status"> | {{resume.status}}(目前状态)</span><br>
+						<span ng-if="resume.honor" class="fa fa-graduation-cap"></span>
+						<span ng-if="resume.honor">{{resume.honor}}(最高荣誉)</span>
+				   </span>
+				<div class="m_portrait">
+					<div></div>
+					<img src="../../../{{resume.icon}}" alt="{{resume.resumename}}" height="120" width="120">
+				</div>
+			</div>
+		</div>
+
+		<div id="educationalBackground" class="profile_box">
+			<h2>教育背景</h2>
+			<div class="educationalShow">
+				<ul class="elist clearfix">
+					{% for vo in resume.education %}
+						<li class="clear">
+							<span class="c9">{{vo.began}} - {{vo.ended}}</span>
+							<div>
+								<h3>{{vo.school}}</h3>
+								<h4>{{vo.profession}}，{{vo.degree}}, {{vo.nature}}</h4>
+							</div>
+						</li>
+					{% endfor %}
+				</ul>
+			</div>
+		</div>
+
+		<div id="workExperience" class="profile_box">
+			<h2>工作经历</h2>
+			<div class="experienceShow">
+				<ul class="wlist clearfix">
+					{% for vo in resume.work %}
+						<li class="clear">
+							<span class="c9">{{vo.yearStart}}.{{vo.monthStart}} - {{vo.yearEnd}}.{{vo.monthEnd}}</span>
+							<div>
+								<h3>{{vo.company}}</h3>
+								<h4>{{vo.position}}</h4>
+							</div>
+						</li>
+					{% endfor %}
+				</ul>
+			</div>
+		</div>
+
+		<div id="family" class="profile_box">
+			<h2>家庭成员</h2>
+			<div class="familyShow">
+				<ul class="flist clearfix" style="padding:0">
+					{% for family in resume.family %}
+					<li style="list-style-type:none;margin:0px;">
+						<div class="familyList">
+							<div class="f16 mb10 fixed_width">
+								{{family.name}}，{{family.company}}，{{family.position}}
+								<span class="c9">（{{family.relation}}）</span>
+							</div>
+							<div class="dl1">
+								{{family.domicile}}
+							</div>
+						</div>
+					</li>
+					{% endfor %}
+				</ul>
+			</div>
+		</div>
+
+		<div id="projectExperience" class="profile_box">
+			<h2>项目经验</h2>
+			<div class="projectShow">
+				<ul class="plist clearfix">
+					{% for vo in resume.project %}
+						<li class="noborder">
+							<div class="projectList">
+								<div class="f16 mb10">{{vo.name}}，{{vo.position}}
+									<span class="c9">（{{vo.yearStart}}.{{vo.monthStart}} - {{vo.yearEnd}}.{{vo.monthEnd}}）</span>
+									}
+								</div>
+								<div class="dl1">
+									{{vo.description}}
+								</div>
+							</div>
+						</li>
+					{% endfor %}
+				</ul>
+			</div>
+		</div>
+
+		<div id="certificate" class="profile_box">
+			<h2>证书等级</h2>
+			<div class="certificateShow">
+				<ul class="clist clearfix">
+					{% for vo in resume.certificate %}
+					<li class="clear">
+						<span class="c9">{{vo.gotYear}}.{{vo.gotMonth}}</span>
+						<div>
+							<h3>{{vo.name}}</h3>
+							<h4>{{vo.nature}}</h4>
+						</div>
+					</li>
+					{% endfor %}
+				</ul>
+			</div>
+		</div>
+
+		<div id="strength" class="profile_box">
+			<h2>特长技能</h2>
+			<div class="strengthShow">
+				<p>{{resume.strength}}</p>
+			</div>
+		</div>
+
+		<div id="prize" class="profile_box">
+			<h2>奖惩情况</h2>
+			<div class="prizeShow">
+				<p>{{resume.prize}}</p>
+			</div>
+		</div>
+
+	</div>
+</div>
+
+<!--<div style="display:none;">-->
+	<!--&lt;!&ndash; 下载简历 &ndash;&gt;-->
+	<!--<div id="downloadOnlineResume" class="popup">-->
+		<!--<table width="100%">-->
+			<!--<tbody><tr>-->
+				<!--<td class="c5 f18">请选择下载简历格式：</td>-->
+			<!--</tr>-->
+			<!--<tr>-->
+				<!--<td>-->
+					<!--<a href="" class="btn_s">word格式</a>-->
+					<!--<a href="" class="btn_s">html格式</a>-->
+					<!--<a href="" class="btn_s">pdf格式</a>-->
+				<!--</td>-->
+			<!--</tr>-->
+			<!--</tbody></table>-->
+	<!--</div>-->
+<!--</div>-->
+
+</body>
+</html>

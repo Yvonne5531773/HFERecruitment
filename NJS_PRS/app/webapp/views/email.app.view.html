@@ -1,0 +1,47 @@
+<link rel="stylesheet" type="text/css" href="../../../css/remodal.css" />
+<link rel="stylesheet" type="text/css" href="../../../css/remodal-default-theme.css" />
+<div class="open_service_success" data-remodal-id="email" style="background: #ffffff;bottom: 150px">
+    <h3>验证邮件已发送</h3>
+    <h4>请登录邮箱点击邮件内的链接，验证后即可发布职位</h4>
+    <div class="open_service_success_btm">
+        <h5>没有收到确认邮件，怎么办？</h5>
+        <div class="contacttip">
+            1.邮箱地址填写错误？ <a id="reRegister" href="javascript:void(0)">重新填写邮箱地址</a> <br>
+            2.看看是否在邮箱的垃圾邮件、广告邮件目录里<br>
+            3.稍等几分钟，若还未收到验证邮件，  <a id="resendOpenService" href="javascript:void(0)">重新发送验证邮件</a> <br>
+            4.还未收到验证邮件，请联系我们，电话：13631205386
+        </div>
+        <!-- <span id="tip" style="display:none; float:right; margin:-60px 0 0 -20px;">验证邮件发送成功！</span> -->
+    </div>
+</div>
+<script type="text/javascript" src="../../../javascripts/jquery.1.10.1.min.js"></script>
+<script type="text/javascript" src="../../../javascripts/jquery.lib.min.js"></script>
+<script src="../../../javascripts/remodal.js"></script>
+<script>
+    $(function(){
+
+        $('#reRegister').on('click', function(){
+            var inst = $('[data-remodal-id=register]').remodal();
+            inst.open();
+        })
+
+        $('#resendOpenService').on('click', function(){
+            var email=$('.register_check #email').val(),
+                password=$('.register_check #password').val();
+            $.ajax({
+                url: "/applicant/register",
+                type: "POST",
+                data: {
+                    email: email,
+                    password: password
+                },
+                dataType: "json"
+            }).done(function(data){
+                if(data.err) alert(data.err);
+                else{
+                    alert('发送成功，请打开邮箱进行验证')
+                }
+            })
+        })
+    })
+</script>

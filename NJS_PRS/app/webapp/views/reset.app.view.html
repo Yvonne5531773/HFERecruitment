@@ -1,0 +1,103 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+    <meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=0">
+    <meta charset="UTF-8">
+    <meta http-equiv="Cache-Control" content="no-siteapp" />
+    <link rel="alternate" media="handheld" />
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <title>Huafa Education Recruitment</title>
+    <link rel="Shortcut Icon" href="#">
+    <link rel="stylesheet" type="text/css" href="../css/style.css" />
+    <link rel="stylesheet" type="text/css" href="../css/external.min.css"/>
+    <link rel="stylesheet" type="text/css" href="../css/popup.css" />
+    <script type="text/javascript">
+        var youdao_conv_id = 271546;
+        var ctx = "h";
+    </script>
+</head>
+
+<body id="login_bg">
+    <div class="login_wrapper">
+        <div class="find_psw">
+            <div class="progress_status" style="border:none;padding:0;left: 45px;">
+                <ul class="status_steps">
+                    <li class="status_done done">
+                        1
+                    </li>
+                    <li class="status_line status_line_done">
+                        <span></span>
+                    </li>
+                    <li id="step2" class="status_grey">
+                        <span>2</span>
+                    </li>
+                    <li id="step2_line" class="status_line status_line_grey">
+                        <span></span>
+                    </li>
+                    <li class="status_grey">
+                        <span>3</span>
+                    </li>
+                </ul>
+                <ul class="status_text">
+                    <li>
+                        输入邮箱地址
+                    </li>
+                    <li class="status_text_2" style="margin-left: 40px">
+                        验证邮箱
+                    </li>
+                    <li class="status_text_3" style="margin-left: 80px;">
+                        重置密码
+                    </li>
+                </ul>
+            </div>
+            <form id="pswForm">
+                <input type="text" name="email" id="email" tabindex="1" value="" placeholder="请输入注册时使用的邮箱地址" />
+                <span class="error" style="display:none;" id="beError"></span>
+                <h3 id="resetMail" style="display: none">重置链接已发送到你邮箱，请查收</h3>
+                <input type="submit" id="submitLogin" value="找回密码" />
+            </form>
+            <!--<div id="resetMail" style="display: none">-->
+                <!--<h3>重置链接已发送到你邮箱，请查收</h3>-->
+            <!--</div>-->
+        </div>
+    </div>
+</body>
+<script type="text/javascript" src="../javascripts/jquery.1.10.1.min.js"></script>
+<script type="text/javascript" src="../javascripts/jquery.lib.min.js"></script>
+<script type="text/javascript">
+    $(document).ready(function() {
+        $('#pswForm input[type="text"]').focus(function(){
+            $(this).siblings('.error').hide();
+        });
+        $("#pswForm").validate({
+            rules: {
+                email: {
+                    required: true,
+                    email: true
+                }
+            },
+            messages: {
+                email: {
+                    required: "请输入注册时使用的邮箱地址",
+                    email: "请输入有效的邮箱地址"
+                }
+            },
+            submitHandler:function(form){
+                $(form).find(":submit").attr("disabled", true);
+                $.post('/applicant/reset',{'email':$('#email').val()},function(obj){
+                    if(!obj.err){
+                        $('#email').next().html('');
+                        $('#submitLogin').hide()
+                        $('#resetMail').css({display:'block'});
+                        $('#step2').removeClass('status_grey').addClass('status_done')
+                        $('#step2_line').removeClass('status_line_grey').addClass('status_line_done')
+                    }else{
+                        $('#email').next().css({display:'block',color:'red'});
+                        $('#email').next().html(obj.err);
+                    }
+                });
+            }
+        });
+    });
+</script>
+</html>

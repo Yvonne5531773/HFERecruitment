@@ -1,0 +1,131 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+    <meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=0">
+    <meta charset="UTF-8">
+    <meta http-equiv="Cache-Control" content="no-siteapp" />
+    <link rel="alternate" media="handheld" />
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <title>Huafa Education Recruitment</title>
+    <link rel="Shortcut Icon" href="#">
+    <link rel="stylesheet" type="text/css" href="../css/style.css" />
+    <link rel="stylesheet" type="text/css" href="../css/external.min.css"/>
+    <link rel="stylesheet" type="text/css" href="../css/popup.css" />
+    <script type="text/javascript">
+        var youdao_conv_id = 271546;
+        var ctx = "h";
+    </script>
+</head>
+
+<body id="login_bg">
+    <div class="login_wrapper">
+        <div class="find_psw">
+            <div class="progress_status" style="border:none;padding:0;left: 45px;">
+                <ul class="status_steps">
+                    <li class="status_done done">
+                        1
+                    </li>
+                    <li class="status_line status_line_done">
+                        <span></span>
+                    </li>
+                    <li id="step2" class="status_done">
+                        <span>2</span>
+                    </li>
+                    <li id="step2_line" class="status_line status_line_done">
+                        <span></span>
+                    </li>
+                    <li id="step3" class="status_grey">
+                        <span>3</span>
+                    </li>
+                </ul>
+                <ul class="status_text">
+                    <li>
+                        输入邮箱地址
+                    </li>
+                    <li class="status_text_2" style="margin-left: 40px">
+                        验证邮箱
+                    </li>
+                    <li class="status_text_3" style="margin-left: 80px;">
+                        重置密码
+                    </li>
+                </ul>
+            </div>
+            <form id="pswUpsertForm" style="margin-left:40px">
+                <input id="username" value="{{username}}" type="hidden">
+                <input name="newpassword" id="newpassword" maxlength="16" type="password" placeholder="新密码">
+                <input name="comfirmpassword" id="comfirmpassword" maxlength="16" type="password" placeholder="确认密码">
+                <span class="error" style="display:none;" id="beError"></span>
+                <input type="submit" id="submitLogin" value="确定" />
+            </form>
+        </div>
+    </div>
+    <div style="display:none;">
+        <div id="updatePassword" class="popup" style="overflow:hidden">
+            <h3>
+                修改密码成功，请重新登录
+            </h3>
+            <h4>
+					<span>
+						5
+					</span>
+                秒后将自动退出
+            </h4>
+            <a href="/applicant/logout" class="btn">
+                直接退出
+            </a>
+        </div>
+    </div>
+</body>
+<script type="text/javascript" src="../javascripts/jquery.1.10.1.min.js"></script>
+<script type="text/javascript" src="../javascripts/jquery.lib.min.js"></script>
+<script type="text/javascript" src="../javascripts/popup.js"></script>
+<script type="text/javascript">
+    $(document).ready(function() {
+        $('#pswUpsertForm input[type="text"]').focus(function(){
+            $(this).siblings('.error').hide();
+        });
+        $("#pswUpsertForm").validate({
+            rules: {
+                newpassword: {
+                    required: true,
+                    rangelength: [6,16]
+                },
+                comfirmpassword: {
+                    required: true,
+                    equalTo: "#newpassword"
+                }
+            },
+            messages: {
+                newpassword: {
+                    required: "请输入新密码",
+                    rangelength: "请输入6-16位密码，字母区分大小写"
+                },
+                comfirmpassword: {
+                    required: "请再次输入新密码",
+                    equalTo: "两次输入的密码不一致，请重新输入"
+                }
+            },
+            submitHandler:function(form){
+                $(form).find(":submit").attr("disabled", true);
+                $.post('/applicant/upsertPwd',{'username':$('#username').val(),'password':$('#newpassword').val()},function(obj){
+                    if(!obj.err){
+                        $('#step3').removeClass('status_grey').addClass('status_done')
+                        $.colorbox({inline:true, href:$("#updatePassword"),title:"重置密码成功"});
+                        setCountdown(4,'updatePassword h4 span', '/');
+                    }else{
+                        $('#comfirmpassword').next().css({display:'block',color:'red'});
+                        $('#comfirmpassword').next().html(obj.err);
+                    }
+                });
+            }
+        });
+        function setCountdown(time,id,url){
+            var count = setTimeout(function(){$("#"+id).html(time);setCountdown(time-1,id,url)},1000);
+            if(time==0){
+                clearTimeout(count);
+                top.location.href=url;
+            }
+        }
+    });
+</script>
+</html>
