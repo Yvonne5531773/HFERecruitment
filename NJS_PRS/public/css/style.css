@@ -271,7 +271,7 @@ ul.hot_pos i{width: 12px;height: 14px;position:absolute;background:url(img/hot.p
 
 #submitLogin:hover{ background:#00694e;}
 .login_right{*width:170px; float:left;margin:10px 0 0 30px;line-height:30px;}
-.registor_now{color:#019875;background:url(img/registor_now.png) right center no-repeat; padding-right:24px; float:left; height:30px;line-height:30px;}
+.registor_now{color:#019875;padding-right:24px; float:left; height:30px;line-height:30px;}
 .registor_now:hover{color:#019875; text-decoration:underline;}
 .login_others{ clear:both; margin:70px 0 10px 0;}
 .icon_wb{width:54px; height:54px; float:left; background:url(img/wbqq.png) left top no-repeat; margin:0 30px 0 10px;}

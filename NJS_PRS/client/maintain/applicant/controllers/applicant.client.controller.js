@@ -111,7 +111,7 @@ angular.module('applicant').controller('ApplicantController', ['$scope', '$http'
             {degree: '博士', flag: 1}
         ];
         var edu = _.filter(educations, function (e) {
-            return e.nature === '统招'
+            return e.nature === '全日制'
         });
         var arr = _.intersectionBy(sorts, edu, 'degree');
         var a = _.sortBy(arr, 'flag');
@@ -127,7 +127,7 @@ angular.module('applicant').controller('ApplicantController', ['$scope', '$http'
             {degree: '博士', flag: 1}
         ];
         var edu = _.filter(educations, function (e) {
-            return e.nature === '非统招'
+            return e.nature === '非全日制'
         });
         var arr = _.intersectionBy(sorts, edu, 'degree');
         var a = _.sortBy(arr, 'flag');
