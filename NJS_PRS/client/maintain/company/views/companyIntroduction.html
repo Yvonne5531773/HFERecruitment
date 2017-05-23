@@ -118,6 +118,58 @@
                     </div>
                 </dd>
             </dl>
+            <dl class="col-md-6 form-group c_section c_stages">
+                <dt>
+                <h2>
+                    <em></em>
+                    主页
+                </h2>
+                <a title="编辑主页" class="c_edit scale_edit" ng-click="editLink()" href="javascript:void(0)"></a>
+                </dt>
+                <dd>
+                    <ul class="reset scaleShow">
+                        <li style="overflow: auto">
+                            主页：
+                            <span class="c5" ng-show="!isEditLink">
+                                {{companyInfo.link}}
+                            </span>
+                        </li>
+                    </ul>
+                    <div class="row" ng-show="isEditLink">
+                        <div class="input-group">
+                            <span class="input-group-addon"><i class="fa fa-link"></i></span>
+                            <input type="text" class="form-control" ng-model="companyInfo.link" autofocus>
+                        </div>
+                        <input type="submit" value="保存" class="btn_small" ng-click="updateCompanyInfoLink(companyInfo)">
+                    </div>
+                </dd>
+            </dl>
+            <dl class="col-md-6 form-group c_section c_stages">
+                <dt>
+                <h2>
+                    <em></em>
+                    招聘链接
+                </h2>
+                <a title="编辑招聘链接" class="c_edit scale_edit" ng-click="editRecuritmentlink()" href="javascript:void(0)"></a>
+                </dt>
+                <dd>
+                    <ul class="reset scaleShow">
+                        <li style="overflow: auto">
+                            招聘链接：
+                            <span class="c5" ng-show="!isEditRecuritmentlink">
+                                {{companyInfo.recuritmentlink}}
+                            </span>
+                        </li>
+                    </ul>
+                    <div class="row" ng-show="isEditRecuritmentlink">
+                        <div class="input-group">
+                            <span class="input-group-addon"><i class="fa fa-link"></i></span>
+                            <input type="text" class="form-control" ng-model="companyInfo.recuritmentlink" autofocus>
+                        </div>
+                        <input type="submit" value="保存" class="btn_small" ng-click="updateCompanyInfoRecuritmentlink(companyInfo)">
+                    </div>
+                </dd>
+            </dl>
         </div>
         <div class="row" style="margin-top: 20px;margin-left: 16px">
             <div class="text-left" style="margin-bottom: 25px;">

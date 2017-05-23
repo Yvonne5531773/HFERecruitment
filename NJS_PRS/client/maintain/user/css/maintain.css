@@ -227,7 +227,7 @@ a.hvr-shutter-in-vertical:hover:before,a.hvr-shutter-in-vertical:focus:before,a.
 
 .c_stages{font-size:18px;line-height:40px; *z-index:12;}
 .c_stages .stageSelect{overflow:hidden;}
-.c_section{margin-bottom:20px;margin-top:-20px;width:22%;margin-left:10px;position:relative; background-color:#fafafa;}
+.c_section{margin-bottom:40px;margin-top:-20px;width:20%;margin-left:10px;position:relative; background-color:#fafafa;}
 .edit_content_company .c_section{margin-bottom:20px;margin-top:20px;padding: 10px 10px 10px 10px;width:100%;margin-left:1px;position:relative; background-color:#fafafa;}
 .c_section h2{ float:left; color:#fff; font-size:16px; font-weight:normal; height:43px; background:#91cebe; margin-top: -9px;/*已投递简历状态:40px;old:20px*/ padding:0 20px; line-height:43px; position: absolute; z-index:2;}
 .c_section h2 em{ background:url(./title_arrow.png) no-repeat; width:6px; height:8px; position:absolute; left:-6px; top:0;}

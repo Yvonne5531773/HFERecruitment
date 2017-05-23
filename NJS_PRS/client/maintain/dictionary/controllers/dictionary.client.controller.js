@@ -101,7 +101,7 @@ angular.module('dictionary').controller('DictionaryController',['instance', '$sc
         if(!_.isEmpty(row.category)&&!_.isEmpty(row.value)){
             DictionaryService.getDictionarys({category:row.category,value:row.value}, function(err, result){
                 if(_.isEmpty(result.data)){
-                    if(!_.isEmpty(row.value)){
+                    if(!_.isEmpty(row.value) && !_.isEmpty(row._id)){
                         CompanyService.getCompanyInfos({dictionary:row._id}, function(err, company){
                             if(!_.isEmpty(company.data))
                                 CompanyService.upsertCompanyInfo({_id:company.data[0]._id,type:row.value}, function(err, res){})

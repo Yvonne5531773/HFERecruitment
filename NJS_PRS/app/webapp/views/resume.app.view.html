@@ -66,7 +66,7 @@
 					<h2>基本信息</h2>
 					<span class="c_edit"></span>
 					<div class="basicShow">
-						<span>
+						<span style="width: 1000px;margin-bottom: 20px">
 							{% if resume.name %} {{resume.name}} {% endif %}
 							{% if resume.gender %} | {{resume.gender}} {% endif %}
 							{% if resume.nation %} | {{resume.nation}} {% endif %}
@@ -75,6 +75,10 @@
 							{% if resume.experience %} | {{resume.experience}} {% endif %}
 							{% if resume.domicile %} | {{resume.domicile}} {% endif %}
 							{% if resume.politic %} | {{resume.politic}}<br> {% endif %}
+							{% if resume.firstdegree %}{{resume.firstdegree}} {% endif %}
+							{% if resume.highdegree %} | {{resume.highdegree}} {% endif %}
+							{% if resume.currentsalary %} | {{resume.currentsalary}} {% endif %}
+							{% if resume.expectsalary %} | {{resume.expectsalary}}<br> {% endif %}
 							{% if resume.phone %} {{resume.phone}} {% endif %}
 							{% if resume.idCard %} | {{resume.idCard}} {% endif %}
 							{% if resume.email %} | {{resume.email}}<br> {% endif %}
@@ -106,6 +110,10 @@
 					<input type="hidden" id="originVal" value="{{resume.origin}}">
 					<input type="hidden" id="domicileVal" value="{{resume.domicile}}">
 					<input type="hidden" id="politicVal" value="{{resume.politic}}">
+					<input type="hidden" id="firstdegreeVal" value="{{resume.firstdegree}}">
+					<input type="hidden" id="highdegreeVal" value="{{resume.highdegree}}">
+					<input type="hidden" id="currentsalaryVal" value="{{resume.currentsalary}}">
+					<input type="hidden" id="expectsalaryVal" value="{{resume.expectsalary}}">
 					<input type="hidden" id="idCardVal" value="{{resume.idCard}}">
 					<input type="hidden" id="addressVal" value="{{resume.address}}">
 					<input type="hidden" id="heightVal" value="{{resume.height}}">
@@ -214,6 +222,8 @@
 												<li>团员</li>
 												<li>党员</li>
 												<li>群众</li>
+												<li>民主党派</li>
+												<li>其它</li>
 											</ul>
 										</div>
 									</td>
@@ -247,6 +257,44 @@
 									</td>
 								</tr>
 								<tr>
+									<td valign="top">
+										<span class="redstar">*</span>
+									</td>
+									<td>
+										<input type="button" name="firstdegree" id="firstdegree" value="第一学历" class="profile_select_190 profile_select_normal">
+										<div class="boxUpDown boxUpDown_190 dn" id="box_firstdegree" style="display: none;">
+											<ul>
+												<li>小学</li><li>初中</li><li>高中</li><li>大专</li><li>本科</li><li>硕士</li><li>博士</li><li>其它</li>
+											</ul>
+										</div>
+									</td>
+									<td valign="top">
+										<span class="redstar">*</span>
+									</td>
+									<td>
+										<input type="button" name="highdegree" id="highdegree" value="最高学历" class="profile_select_190 profile_select_normal">
+										<div class="boxUpDown boxUpDown_190 dn" id="box_highdegree" style="display: none;">
+											<ul>
+												<li>小学</li><li>初中</li><li>高中</li><li>大专</li><li>本科</li><li>硕士</li><li>博士</li><li>其它</li>
+											</ul>
+										</div>
+									</td>
+								</tr>
+								<tr>
+									<td valign="top">
+										<span class="redstar">*</span>
+									</td>
+									<td>
+										<input style="width: 230px;" type="text" placeholder="目前年薪" value="" name="currentsalary" id="currentsalary">
+									</td>
+									<td valign="top">
+										<span class="redstar">*</span>
+									</td>
+									<td>
+										<input style="width: 230px;" type="text" placeholder="期望年薪" value="" name="expectsalary" id="expectsalary">
+									</td>
+								</tr>
+								<tr>
 									<td valign="top"> </td>
 									<td>
 										<input style="width: 230px;" type="text" placeholder="最近工作单位" value="" name="workunit" id="workunit">
@@ -262,9 +310,9 @@
                                         <input type="button" value="目前状态" name="status" id="status" class="profile_select_410 profile_select_normal">
                                         <div class="boxUpDown boxUpDown_410 dn" id="box_status" style="display: none;">
                                             <ul>
-                                                <li>我目前已离职，可快速到岗</li>
-                                                <li>我目前正在职，正考虑换个新环境</li>
-                                                <li>我是应届毕业生</li>
+                                                <li>目前已离职</li>
+                                                <li>目前在职,考虑换工作</li>
+                                                <li>应届毕业生</li>
                                                 <li>其它</li>
                                             </ul>
                                         </div>
@@ -283,7 +331,8 @@
                                             <ul>
                                                 <li>未婚</li>
                                                 <li>已婚</li>
-                                                <li>保密</li>
+                                                <li>离异</li>
+												<li>其它</li>
                                             </ul>
                                         </div>
                                         <input type="button" value="子女状况" name="child" id="child" class="profile_select_190 profile_select_normal">
@@ -348,7 +397,7 @@
 										<span class="redstar">*</span>
 									</td>
 									<td>
-										<input type="text" placeholder="选择学校" name="schoolName" class="schoolName">
+										<input type="text" placeholder="学校" name="schoolName" class="schoolName">
 									</td>
 									<td valign="top">
 										<span class="redstar">*</span>
@@ -372,7 +421,7 @@
 										<span class="redstar">*</span>
 									</td>
 									<td>
-										<input type="text" placeholder="专业名称" name="professionalName" class="professionalName" onclick="majorSelect_2()">
+										<input type="text" placeholder="专业名称" name="professionalName" class="professionalName">
 									</td>
 									<td valign="top">
 										<span class="redstar">*</span>
@@ -459,7 +508,7 @@
 										<span class="redstar">*</span>
 									</td>
 									<td>
-										<input type="text" placeholder="选择学校" name="schoolName" class="schoolName">
+										<input type="text" placeholder="学校" name="schoolName" class="schoolName">
 									</td>
 									<td valign="top">
 										<span class="redstar">*</span>
@@ -483,7 +532,7 @@
 										<span class="redstar">*</span>
 									</td>
 									<td>
-										<input type="text" placeholder="专业名称" name="professionalName" class="professionalName" onclick="majorSelect_2()">
+										<input type="text" placeholder="专业名称" name="professionalName" class="professionalName" >
 									</td>
 									<td valign="top">
 										<span class="redstar">*</span>
@@ -521,11 +570,11 @@
 									</td>
 									<td>
 										<ul class="education_radio clearfix reset">
-											<li class="current" style="width: 80px">
+											<li class="current" style="width: 50px">
 												全日制<em></em>
 												<input type="radio" checked="checked" name="nature" value='全日制'>
 											</li>
-											<li style="width: 80px">
+											<li style="width: 60px">
 												非全日制<em></em>
 												<input type="radio" name="nature" value='非全日制'>
 											</li>
@@ -544,7 +593,7 @@
 						</form>
 					</div>
 					<div {% if resume.education.length==0 %} class = "educationalAdd pAdd" {%else%}class = "educationalAdd pAdd dn" {% endif %}>
-						<span>添加教育经历</span>
+						<span>添加教育经历，从高中开始</span>
 					</div>
 				</div>
 				<div data-remodal-id="choose-box-wrapper" style="background: #91cebe;padding: 0px;margin-bottom: 100px">
@@ -749,7 +798,7 @@
 						</form>
 					</div>
 					<div {% if resume.work.length==0 %} class = "experienceAdd pAdd" {%else%}class = "experienceAdd pAdd dn" {% endif %}>
-						<span>添加工作经历</span>
+						<span>添加工作经历，从最近工作开始</span>
 					</div>
 				</div>
 
@@ -801,7 +850,6 @@
 												<li>姐妹</li>
 												<li>叔侄</li>
 												<li>婆媳</li>
-												<li>其它</li>
 											</ul>
 										</div>
 									</td>
@@ -813,7 +861,7 @@
 									</td>
 									<td valign="top"><span class="redstar">*</span></td>
 									<td>
-										<input name="position" id="position" type="text" placeholder="职务" onclick="funtypeSelect_2(2)" />
+										<input name="position" id="position" type="text" placeholder="职务"/>
 									</td>
 								</tr>
 								<tr>
@@ -956,7 +1004,7 @@
 						</form>
 					</div>
 					<div {% if resume.project.length==0 %} class = "projectAdd pAdd" {%else%}class = "projectAdd pAdd dn" {% endif %}>
-						<span>添加项目经验</span>
+						<span>添加项目经验，从最近开始</span>
 					</div>
 				</div>
 
@@ -982,7 +1030,9 @@
 													<li value="02">计算机证书</li>
 													<li value="03">会计证书</li>
 													<li value="04">职称证书</li>
-													<li value="05">其他证书</li>
+													<li value="05">教师证书</li>
+													<li value="06">其他证书</li>
+													<li value="00">自定义</li>
 												</ul>
 											</div>
 										</div>
@@ -992,6 +1042,7 @@
 									</td>
 									<td>
 										<div class="fl">
+											<input style="width:410px;height:46px;" type="text" placeholder="证书等级" name="certificateNature" class="certificateNatureText dn">
 											<input type="button" placeholder="证书等级" name="certificateNature" class="profile_select_410 profile_select_normal certificateNature">
 											<div class="box_certificateNature boxUpDown boxUpDown_410 dn" style="display: none;">
 											</div>
@@ -1079,7 +1130,9 @@
 													<li value="02">计算机证书</li>
 													<li value="03">会计证书</li>
 													<li value="04">职称证书</li>
-													<li value="05">其他证书</li>
+													<li value="05">教师证书</li>
+													<li value="06">其他证书</li>
+													<li value="00">自定义</li>
 												</ul>
 											</div>
 										</div>
@@ -1089,6 +1142,7 @@
 									</td>
 									<td>
 										<div class="fl">
+											<!--<input style="width:410px;height:46px;" type="text" placeholder="证书等级" name="certificateNature" class="certificateNatureText dn">-->
 											<input type="button" placeholder="证书等级" name="certificateNature" class="profile_select_410 profile_select_normal certificateNature">
 											<div class="box_certificateNature boxUpDown boxUpDown_410 dn" style="display: none;">
 											</div>

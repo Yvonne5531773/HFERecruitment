@@ -53,6 +53,38 @@
                         </form>
                     </div>
                     <dl class="hotSearch"></dl>
+                    <ul id="da-thumbs" class="da-thumbs">
+                        {% for vo in companyInfoFs %}
+                        <li >
+                            <a style="left:6px;" href="/showCompany/{{vo._id}}" target="_blank">
+                                <img src="../../../{{vo.icon}}" width="130px" height="130px" alt="" />
+                                <div class="hot_info">
+                                    <h2 title="{{vo.type}}">{{vo.type}}</h2>
+                                    <em></em>
+                                    <p title="{{vo.address}}">{{vo.address}}</p>
+                                </div>
+                            </a>
+                            <h2 style="margin:5px 0;text-align:center;font-size:16px;width:150px" title="{{vo.type}}">{{vo.type}}</h2>
+                        </li>
+                        {% endfor %}
+                    </ul>
+                    {% if companyInfoSs.length>0 %}
+                    <ul id="da-thumbs" class="da-thumbs">
+                        {% for vo in companyInfoSs %}
+                        <li >
+                            <a style="left:6px;" href="/showCompany/{{vo._id}}" target="_blank">
+                                <img src="../../../{{vo.icon}}" width="130px" height="130px"/>
+                                <div class="hot_info">
+                                    <h2 title="{{vo.type}}">{{vo.type}}</h2>
+                                    <em></em>
+                                    <p title="{{vo.address}}">{{vo.address}}</p>
+                                </div>
+                            </a>
+                            <h2 style="margin:5px 0;text-align:center;font-size:16px;width:150px" title="{{vo.type}}">{{vo.type}}</h2>
+                        </li>
+                        {% endfor %}
+                    </ul>
+                    {% endif %}
                     <div class="breakline"></div>
 
                     <ul class="reset hotabbing" id="check_position">

@@ -631,7 +631,13 @@ function file_check(obj,action_url,id) {
                         "certificateYear" == b.attr("name") || "certificateMonth" == b.attr("name")? a.appendTo($(b).parent().parent()) : a.insertAfter(b)
                     },
                     submitHandler: function (a) {
-                        var certificateName = $('input[name="certificateName"]', a).val(), certificateNature = $('input[name="certificateNature"]', a).val(), certificateYear = $('input[name="certificateYear"]', a).val(), certificateMonth = $('input[name="certificateMonth"]', a).val(), _id = $(".certificateId", a).val();
+                        var certificateName = $('input[name="certificateName"]', a).val(),
+                            certificateYear = $('input[name="certificateYear"]', a).val(),
+                            certificateMonth = $('input[name="certificateMonth"]', a).val(),
+                            _id = $(".certificateId", a).val(),
+                            certificateNature;
+                        if(certificateName==='自定义') certificateNature = $('.certificateNatureText', a).val();
+                        else certificateNature = $('.certificateNature', a).val();
                         $(a).find(":submit").val("保存中...").attr("disabled", !0);
                         $.ajax({
                             url: "/resume/upsertCertificate",
@@ -787,6 +793,10 @@ function file_check(obj,action_url,id) {
                 origin = $("#originVal").val(),
                 domicile = $("#domicileVal").val(),
                 politic = $("#politicVal").val(),
+                firstdegree = $("#firstdegreeVal").val(),
+                highdegree = $("#highdegreeVal").val(),
+                currentsalary = $("#currentsalaryVal").val(),
+                expectsalary = $("#expectsalaryVal").val(),
                 idCard = $("#idCardVal").val(),
                 address = $("#addressVal").val(),
                 height = $("#heightVal").val(),
@@ -811,6 +821,10 @@ function file_check(obj,action_url,id) {
                 $("#origin").val(origin).css("color", "#333"),
                 $("#domicile").val(domicile).css("color", "#333"),
             "" != politic && ($("#politic").val(politic).css("color", "#333")),
+            "" != firstdegree && ($("#firstdegree").val(firstdegree).css("color", "#333")),
+            "" != highdegree && ($("#highdegree").val(highdegree).css("color", "#333")),
+                $("#currentsalary").val(currentsalary),
+                $("#expectsalary").val(expectsalary),
                 $("#idCard").val(idCard),
                 $("#address").val(address),
                 $("#height").val(height),
@@ -836,12 +850,16 @@ function file_check(obj,action_url,id) {
                     $("#status").removeClass("select_focus"),
                     $("#nation").removeClass("select_focus"),
                     $("#politic").removeClass("select_focus"),
+                    $("#firstdegree").removeClass("select_focus"),
+                    $("#highdegree").removeClass("select_focus"),
                     $("#married").removeClass("select_focus"),
                     $("#child").removeClass("select_focus"),
                     $("#box_nation").show(),
                     $("#box_experience").hide(),
                     $("#box_status").hide(),
                     $("#box_politic").hide(),
+                    $("#box_firstdegree").hide(),
+                    $("#box_highdegree").hide(),
                     $("#box_married").hide(),
                     $("#box_child").hide()
             }),
@@ -859,12 +877,16 @@ function file_check(obj,action_url,id) {
                     $("#status").removeClass("select_focus"),
                     $("#nation").removeClass("select_focus"),
                     $("#politic").removeClass("select_focus"),
+                    $("#firstdegree").removeClass("select_focus"),
+                    $("#highdegree").removeClass("select_focus"),
                     $("#married").removeClass("select_focus"),
                     $("#child").removeClass("select_focus"),
                     $("#box_experience").show(),
                     $("#box_status").hide(),
                     $("#box_nation").hide(),
                     $("#box_politic").hide(),
+                    $("#box_firstdegree").hide(),
+                    $("#box_highdegree").hide(),
                     $("#box_married").hide(),
                     $("#box_child").hide()
             }),
@@ -882,11 +904,15 @@ function file_check(obj,action_url,id) {
                     $("#nation").removeClass("select_focus"),
                     $("#experience").removeClass("select_focus"),
                     $("#politic").removeClass("select_focus"),
+                    $("#firstdegree").removeClass("select_focus"),
+                    $("#highdegree").removeClass("select_focus"),
                     $("#married").removeClass("select_focus"),
                     $("#child").removeClass("select_focus"),
                     $("#box_nation").hide(),
                     $("#box_experience").hide(),
                     $("#box_politic").hide(),
+                    $("#box_firstdegree").hide(),
+                    $("#box_highdegree").hide(),
                     $("#box_married").hide(),
                     $("#box_child").hide(),
                     $("#box_status").show()
@@ -922,6 +948,54 @@ function file_check(obj,action_url,id) {
                     $("#box_politic").hide(),
                     $("#profileForm").validate().element($("#politic"))
             }),
+            $("#firstdegree").bind("click", function (a) {
+                a.stopPropagation(),
+                    $(this).addClass("select_focus"),
+                    $("#nation").removeClass("select_focus"),
+                    $("#experience").removeClass("select_focus"),
+                    $("#status").removeClass("select_focus"),
+                    $("#married").removeClass("select_focus"),
+                    $("#child").removeClass("select_focus"),
+                    $("#box_nation").hide(),
+                    $("#box_experience").hide(),
+                    $("#box_status").hide(),
+                    $("#box_married").hide(),
+                    $("#box_child").hide(),
+                    $("#box_politic").hide(),
+                    $("#box_firstdegree").show()
+            }),
+            $("#box_firstdegree").on("click", "ul li", function (a) {
+                a.stopPropagation();
+                var b = $(this).text();
+                $("#firstdegree").val(b).css("color", "#333").removeClass("select_focus"),
+                    $("#firstdegree").val(b),
+                    $("#box_firstdegree").hide(),
+                    $("#profileForm").validate().element($("#firstdegree"))
+            }),
+            $("#highdegree").bind("click", function (a) {
+                a.stopPropagation(),
+                    $(this).addClass("select_focus"),
+                    $("#nation").removeClass("select_focus"),
+                    $("#experience").removeClass("select_focus"),
+                    $("#status").removeClass("select_focus"),
+                    $("#married").removeClass("select_focus"),
+                    $("#child").removeClass("select_focus"),
+                    $("#box_nation").hide(),
+                    $("#box_experience").hide(),
+                    $("#box_status").hide(),
+                    $("#box_married").hide(),
+                    $("#box_child").hide(),
+                    $("#box_politic").hide(),
+                    $("#box_highdegree").show()
+            }),
+            $("#box_highdegree").on("click", "ul li", function (a) {
+                a.stopPropagation();
+                var b = $(this).text();
+                $("#highdegree").val(b).css("color", "#333").removeClass("select_focus"),
+                    $("#highdegree").val(b),
+                    $("#box_highdegree").hide(),
+                    $("#profileForm").validate().element($("#highdegree"))
+            }),
             $("#married").bind("click", function (a) {
                 a.stopPropagation(),
                     $(this).addClass("select_focus"),
@@ -929,11 +1003,15 @@ function file_check(obj,action_url,id) {
                     $("#experience").removeClass("select_focus"),
                     $("#status").removeClass("select_focus"),
                     $("#politic").removeClass("select_focus"),
+                    $("#firstdegree").removeClass("select_focus"),
+                    $("#highdegree").removeClass("select_focus"),
                     $("#child").removeClass("select_focus"),
                     $("#box_nation").hide(),
                     $("#box_experience").hide(),
                     $("#box_status").hide(),
                     $("#box_politic").hide(),
+                    $("#box_firstdegree").hide(),
+                    $("#box_highdegree").hide(),
                     $("#box_child").hide(),
                     $("#box_married").show()
             }),
@@ -986,6 +1064,10 @@ function file_check(obj,action_url,id) {
                     origin: {required: !0},
                     domicile: {required: !0},
                     politic: {required: !0},
+                    firstdegree: {required: !0},
+                    highdegree: {required: !0},
+                    currentsalary: {required: !0},
+                    expectsalary: {required: !0},
                     idCard: {required: !0,number:true},
                     address: {required: !0},
                     height: {required: !1,number:true},
@@ -1010,6 +1092,10 @@ function file_check(obj,action_url,id) {
                     origin: {required: "请选择你的籍贯"},
                     domicile: {required: "请选择你的现户籍地"},
                     politic: {required: "请选择你的政治面貌"},
+                    firstdegree: {required: "请选择你的第一学历"},
+                    highdegree: {required: "请选择你的最高学历"},
+                    currentsalary: {required: "请填写你的目前年薪"},
+                    expectsalary: {required: "请填写你的期望年薪"},
                     idCard: {required: "请输入你的身份证号码",number: "请输入有效的号码"},
                     address: {required: "请输入你的通讯地址"},
                     height: {number: "请输入有效的数字"},
@@ -1031,6 +1117,10 @@ function file_check(obj,action_url,id) {
                         origin = $('input[name="origin"]', a).val(),
                         domicile = $('input[name="domicile"]', a).val(),
                         politic = $('input[name="politic"]', a).val()==='政治面貌'?'':$('input[name="politic"]', a).val(),
+                        firstdegree = $('input[name="firstdegree"]', a).val()==='第一学历'?'':$('input[name="firstdegree"]', a).val(),
+                        highdegree = $('input[name="highdegree"]', a).val()==='最高学历'?'':$('input[name="highdegree"]', a).val(),
+                        currentsalary = $('input[name="currentsalary"]', a).val(),
+                        expectsalary = $('input[name="expectsalary"]', a).val(),
                         idCard = $('input[name="idCard"]', a).val(),
                         address = $('input[name="address"]', a).val(),
                         height = $('input[name="height"]', a).val(),
@@ -1058,6 +1148,10 @@ function file_check(obj,action_url,id) {
                             origin: origin,
                             domicile:domicile,
                             politic:politic,
+                            firstdegree:firstdegree,
+                            highdegree:highdegree,
+                            currentsalary:currentsalary,
+                            expectsalary:expectsalary,
                             idCard:idCard,
                             address:address,
                             height:height,
@@ -1081,7 +1175,7 @@ function file_check(obj,action_url,id) {
                             }
                             e = res.name;
                             if(res.gender && "" != res.gender) e += " | " + res.gender;
-                            e += " | " + res.nation + " | " + getOperationTime(res.birthed) + "<br />" + '籍贯'+res.origin + ' | ' + res.experience + ' | '+ res. domicile + ' | '+ res.politic+ "<br />" + res.phone + " | " + res.idCard+' | '+res.email+'<br />'+res.address+ "<br />";
+                            e += " | " + res.nation + " | " + getOperationTime(res.birthed) + "<br />" + '籍贯'+res.origin + ' | ' + res.experience + ' | '+ res.domicile + ' | '+ res.politic+ "<br />" + res.firstdegree + ' | '+ res.highdegree + ' | '+ res. currentsalary + ' | '+ res.expectsalary + "<br />" + res.phone + " | " + res.idCard+' | '+res.email+'<br />'+res.address+ "<br />";
                             if(res.workunit && "" != res.workunit) e += res.workunit;
                             if(res.post && "" != res.post) e += " | " + res.post;
                             if(res.status && "" != res.status) e += " | " + res.status+ '<br />';
@@ -1106,6 +1200,10 @@ function file_check(obj,action_url,id) {
                             $("#originVal").val(res.origin);
                             $("#domicileVal").val(res.domicile);
                             $("#politicVal").val(res.politic);
+                            $("#firstdegreeVal").val(res.firstdegree);
+                            $("#highdegreeVal").val(res.highdegree);
+                            $("#currentsalaryVal").val(res.currentsalary);
+                            $("#expectsalaryVal").val(res.expectsalary);
                             $("#idCardVal").val(res.idCard);
                             $("#addressVal").val(res.address);
                             $("#heightVal").val(res.height);
@@ -1558,7 +1656,15 @@ function file_check(obj,action_url,id) {
             $(this).parents(".box_certificateName").hide();
             c = $(this).parents(".certificateForm");
             $(this).parents(".box_certificateName").siblings(".certificateName").hasClass("error") && $(this).parents(".certificateForm").validate().element(c.find(".certificateName"));
-            $(".box_certificateNature").html(certificate_child(this.value));
+            if(this.value==0) {
+                $(".certificateNatureText").removeClass('dn');
+                $(".certificateNature").addClass('dn');
+            }
+            else {
+                $(".certificateNatureText").addClass('dn');
+                $(".certificateNature").removeClass('dn');
+                $(".box_certificateNature").html(certificate_child(this.value));
+            }
         })
         $("#certificate").on("click", ".certificateNature", function (a) {
             a.stopPropagation(), $(".profile_select_normal").removeClass("select_focus"), $(".boxUpDown").hide(), $(this).addClass("select_focus"), $(this).siblings(".box_certificateNature").show()
@@ -1589,6 +1695,11 @@ function file_check(obj,action_url,id) {
                     d = a.siblings("span").attr("data-gotMonth"),
                     e = a.parent("li").find("h4").attr("data-nature"),
                     g = a.parent("li").find("h3").attr("data-name");
+                if(g==='自定义') {
+                    this.obj.children(".certificateShow").find(".certificateNatureText").removeClass('dn');
+                    this.obj.children(".certificateShow").find(".certificateNatureText").css("color", "#333").val(e),
+                    this.obj.children(".certificateShow").find(".certificateNature").addClass('dn');
+                }
                 this.obj.children(".certificateShow").find(".certificateName").css("color", "#333").val(g),
                     this.obj.children(".certificateShow").find(".certificateNature").css("color", "#333").val(e),
                     this.obj.children(".certificateShow").find(".certificateYear").css("color", "#333").val(c),
@@ -1596,11 +1707,6 @@ function file_check(obj,action_url,id) {
                     this.obj.children(".certificateShow").find(".certificateId").val(b),
                     $(".certificateForm").validate().element($(".certificateYear")),
                     this.obj.children(".certificateShow").children(".certificateForm").show(),
-                    // this.schoolNameVal = g,
-                    // this.degreeVal = e,
-                    // this.professionalNameVal = f,
-                    // this.schoolYearStartVal = c,
-                    // this.schoolYearEndVal = d,
                     this.obj.children(".c_add").addClass("dn"),
                     j(this.obj);
             }, Del: function (a) {
@@ -1763,13 +1869,13 @@ function file_check(obj,action_url,id) {
         education.obj.children(".educationalShow").find(".btn_profile_cancel").bind("click", function () {
             education.AddMoreCancel(), education.obj.find(".c_add").removeClass("dn")
         });
-        $('#educationalBackground').on("click", ".schoolName", function () {
-            var inst = $('[data-remodal-id=choose-box-wrapper]').remodal();
-            inst.open();
-            initProvince();
-            $('[province-id="1"]').addClass('choosen');
-            initSchool(1);
-        });
+        // $('#educationalBackground').on("click", ".schoolName", function () {
+        //     var inst = $('[data-remodal-id=choose-box-wrapper]').remodal();
+        //     inst.open();
+        //     initProvince();
+        //     $('[province-id="1"]').addClass('choosen');
+        //     initSchool(1);
+        // });
         function hide() {
             $('#choose-box-wrapper').css("display","none");
         }
@@ -1817,9 +1923,9 @@ function file_check(obj,action_url,id) {
                     nature: {required: !0},
                 },
                 messages: {
-                    schoolName: {required: "请选择学校"},
+                    schoolName: {required: "请填写学校"},
                     degree: {required: "请选择学历"},
-                    professionalName: {required: "请选择专业"},
+                    professionalName: {required: "请填写专业"},
                     schoolYearStart: {required: "请选择年份", checkSchoolYear: "开始年份需小于结束年份"},
                     schoolYearEnd: {required: "请选择年份", checkSchoolYear: "结束年份不能早于开始年份"},
                     nature: {required: "请选择学历性质"}

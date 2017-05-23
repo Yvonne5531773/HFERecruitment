@@ -74,6 +74,14 @@
             upsertCompanyInfoCommon(entity);
             $scope.isEditTele = false;
         };
+        $scope.updateCompanyInfoLink = function (entity) {
+            upsertCompanyInfoCommon(entity);
+            $scope.isEditLink = false;
+        };
+        $scope.updateCompanyInfoRecuritmentlink = function (entity) {
+            upsertCompanyInfoCommon(entity);
+            $scope.isEditRecuritmentlink = false;
+        };
         function upsertCompanyInfoCommon(entity){
             entity.type = $scope.segmentType.value;
             entity.dictionary = $scope.segmentType._id;
@@ -148,6 +156,12 @@
         }
         $scope.editTele = function(){
             $scope.isEditTele = !$scope.isEditTele;
+        }
+        $scope.editLink = function(){
+            $scope.isEditLink = !$scope.isEditLink;
+        }
+        $scope.editRecuritmentlink = function(){
+            $scope.isEditRecuritmentlink = !$scope.isEditRecuritmentlink;
         }
 
         $scope.uploadFile = function(companyInfo) {

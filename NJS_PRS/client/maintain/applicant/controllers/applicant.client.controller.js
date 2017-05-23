@@ -42,7 +42,7 @@ angular.module('applicant').controller('ApplicantController', ['$scope', '$http'
         });
     };
     $scope.getPositionForSelectShow();
-    $scope.selectForDegree = ['大专','本科','硕士','博士'];
+    $scope.selectForDegree = ['小学','初中','高中','大专','本科','硕士','博士'];
     $scope.selectForExperience = ['应届毕业生','1年','2年','3年','4年','5年','6年','7年','8年','9年','10年','10年以上'];
     $scope.myData = {
         enableSorting: true,
@@ -145,14 +145,8 @@ angular.module('applicant').controller('ApplicantController', ['$scope', '$http'
 
     $scope.myData.columnDefs = [
         {field: 'resume.name', enableFiltering: true, allowCellFocus:false,displayName: '应聘者'},
-        {field: 'firstEducation.degree', enableFiltering: true, allowCellFocus:false, displayName:'第一学历'},
-        {field: 'firstEducation.school', enableFiltering: true,allowCellFocus:false, displayName:'第一学历学校'},
-        {field: 'firstEducation.profession', enableFiltering: true, allowCellFocus:false, displayName:'第一学历专业'},
-        {field: 'firstEducation.ended', allowCellFocus:false, displayName:'第一学历毕业时间'},
-        {field: 'highEducation.degree', allowCellFocus:false, displayName:'最高学历', visible:false},
-        {field: 'highEducation.school', allowCellFocus:false, displayName:'最高学历学校', visible:false},
-        {field: 'highEducation.profession', allowCellFocus:false, displayName:'最高学历专业', visible:false},
-        {field: 'highEducation.ended', allowCellFocus:false, displayName:'最高学历毕业时间', visible:false},
+        {field: 'resume.firstdegree', enableFiltering: true, allowCellFocus:false, displayName:'第一学历'},
+        {field: 'resume.highdegree', enableFiltering: true, allowCellFocus:false, displayName:'最高学历'},
         {field: 'resume.experience', enableFiltering: true, enableFiltering: true, allowCellFocus:false,displayName: '工作经验'},
         {field: 'resume.phone', allowCellFocus:false, displayName:'联系电话'},
         {field: 'resume.email', allowCellFocus:false, displayName:'邮箱'},
@@ -197,13 +191,7 @@ angular.module('applicant').controller('ApplicantController', ['$scope', '$http'
             $scope.myData.data = _.filter($scope.applicants, function(o){return o.resume.experience === $scope.experience});
         }
         if(!_.isEmpty($scope.firstEducationDegree)){
-            $scope.myData.data = _.filter($scope.applicants, function(o){return o.firstEducation.degree === $scope.firstEducationDegree});
-        }
-        if(!_.isEmpty($scope.firstEducationSchool)){
-            $scope.myData.data = _.filter($scope.applicants, function(o){return o.firstEducation.school === $scope.firstEducationSchool});
-        }
-        if(!_.isEmpty($scope.firstEducationProfession)){
-            $scope.myData.data = _.filter($scope.applicants, function(o){return o.firstEducation.profession === $scope.firstEducationProfession});
+            $scope.myData.data = _.filter($scope.applicants, function(o){return o.resume.firstdegree === $scope.firstEducationDegree});
         }
         if(!_.isEmpty($scope.positionName)){
             $scope.myData.data = _.filter($scope.applicants, {positionName: $scope.positionName});
@@ -347,8 +335,8 @@ angular.module('applicant').controller('ApplicantController', ['$scope', '$http'
 }]);
 
 angular.module('applicant').controller('InfoController',
-    ['instance','$scope', '$uibModal', '$uibModalInstance', '$filter', '$interval', 'selectedRow',
-        function (instance,$scope, $uibModal, $uibModalInstance, $filter, $interval, selectedRow) {
+    ['instance','$scope', '$uibModal', '$uibModalInstance', '$filter', '$interval', 'selectedRow', '$window',
+        function (instance,$scope, $uibModal, $uibModalInstance, $filter, $interval, selectedRow, $window) {
 
             $scope.resume = selectedRow;
 

@@ -435,6 +435,9 @@ body {
     /*height: 60%;*/
     width: 100%;
 }
+.basicShow span{
+    float:left;width:300px;position:relative;font-size: 17px;
+}
 
 /*.btns ul{ list-style:none; padding:0px; margin:0px; width:100%;}*/
 /*.btns ul li{*/

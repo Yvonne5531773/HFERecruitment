@@ -34,7 +34,7 @@
                                 </a>
                             </div>
                             <div class="c_box companyName">
-                                <h2 style="height: 30px;margin-bottom: 35px;" title="{{companyInfo.type}}">
+                                <h2 style="height: 30px;" title="{{companyInfo.type}}">
                                     {{companyInfo.type}}
                                 </h2>
                                 <div id="Tags">
@@ -59,12 +59,18 @@
                                             </tr>
                                             <tr>
                                                 <td>
-                                                    单位电话
+                                                    电话
                                                 </td>
                                                 <td>
-                                                    <!--<a rel="nofollow">-->
-                                                        {{companyInfo.tele}}
-                                                    <!--</a>-->
+                                                    {{companyInfo.tele}}
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>
+                                                    主页
+                                                </td>
+                                                <td>
+                                                    <a href="{{companyInfo.link}}" target="_blank">{{companyInfo.link}}</a>
                                                 </td>
                                             </tr>
                                             </tbody>
@@ -94,10 +100,6 @@
                                     </i>
                                     个职位正在招聘
                                 </span>
-                            {% else %}
-                                <span class="jobsTotal">
-                                    该单位暂无职位招聘
-                                </span>
                             {% endif %}
                             </dt>
                             <dd>
@@ -123,6 +125,18 @@
                                     </li>
                                     {% endfor %}
                                 </ul>
+                                {% if positions.length<=0 %}
+                                    {% if companyInfo.recuritmentlink %}
+                                        <span style="margin:15px 20px 5px 14px;float: left">该单位招聘链接：</span>
+                                        <a href="{{companyInfo.recuritmentlink}}" style="float:left;margin:15px 25px 0 15px;" target="_blank">
+                                            {{companyInfo.recuritmentlink}}
+                                        </a>
+                                    {% else %}
+                                        <span style="float:left;margin:15px 25px 0 15px;">
+                                            该单位暂无职位招聘
+                                        </span>
+                                    {% endif %}
+                                {% endif %}
                             </dd>
                         </dl>
                     </div>
@@ -140,7 +154,7 @@
                                     <dd style="padding: 45px 5px 5px 5px;">
                                         <div class="c_intro">
                                             {% if companyInfo.company.length<=0 %}
-                                            <div class="row" style="margin-left: 30px">暂无</div>
+                                            <div class="row" style="margin-left: 30px">该单位暂无介绍</div>
                                             {% else %}
                                             {% for company in companyInfo.company %}
                                             <div class="flow-box">

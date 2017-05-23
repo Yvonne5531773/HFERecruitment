@@ -117,7 +117,7 @@ span.error{display:block; margin:5px 0 10px 0; font-size:14px; color:#ff6a6a;tex
 
 /*index content*/
 .content{ width:744px; float:right;}
-.da-thumbs {list-style: none;height: 280px;	position: relative;	padding: 0;}
+.da-thumbs {list-style: none;height:350px;	position: relative;	padding: 0;}
 .da-thumbs li {	float: left;margin-right:8px;background: #fff;position: relative;	border:2px solid #fafafa;}
 .da-thumbs li.last{margin-right:0;}
 .da-thumbs li a,.da-thumbs li a img {display: block;position: relative;}
@@ -271,7 +271,7 @@ ul.hot_pos i{width: 12px;height: 14px;position:absolute;background:url(img/hot.p
 
 #submitLogin:hover{ background:#00694e;}
 .login_right{*width:170px; float:left;margin:10px 0 0 30px;line-height:30px;}
-.registor_now{color:#019875;padding-right:24px; float:left; height:30px;line-height:30px;}
+.registor_now{color:#019875; padding-right:24px; float:left; height:30px;line-height:30px;}
 .registor_now:hover{color:#019875; text-decoration:underline;}
 .login_others{ clear:both; margin:70px 0 10px 0;}
 .icon_wb{width:54px; height:54px; float:left; background:url(img/wbqq.png) left top no-repeat; margin:0 30px 0 10px;}
@@ -613,7 +613,7 @@ ul.hot_pos i{width: 12px;height: 14px;position:absolute;background:url(img/hot.p
 .c_section{margin-bottom:40px;position:relative; background-color:#fafafa;}
 .c_section h2{ float:left; color:#fff; font-size:24px; font-weight:normal; height:43px; background:#91cebe; margin:-8px 0 10px 40px;/*已投递简历状态:40px;old:20px*/ padding:0 20px; line-height:43px; position: absolute; z-index:2;}
 .c_section h2 em{ background:url(../../img/title_arrow.png) no-repeat; width:6px; height:8px; position:absolute; left:-6px; top:0;}
-.c_section > dd{color:#555; padding:50px 25px 20px 25px;clear:both; }
+.c_section > dd{color:#555; padding:50px 25px 80px 25px;clear:both; }
 .c_section_service > dd{color:#555; padding:50px 0px 20px 25px; clear:both; }
 .c_section span.error{margin:5px 0 10px 0;}
 .c_product{clear:both;margin-bottom:40px; height:220px;position:relative;}
@@ -663,7 +663,7 @@ ul.c_jobs{margin:-10px 0 0 0;*margin:-50px 0 0 -20px;}
 .c_tags table{ width:283px; color:#555; font-size:18px; line-height:24px; }
 .c_tags table td{border-right:3px solid #fff;border-bottom:3px solid #fff;}
 .c_tags table span.error{width:140px;word-wrap:break-word;}
-.c_tags td{background:#fafafa;  padding:10px 5px;}
+.c_tags td{background:#fafafa;  padding:10px 10px;}
 .c_tags td a{color:#0d9572; text-decoration:underline;}
 /*add by nancy*/
 .solveWrap td a{color:#0d9572; text-decoration:underline; overflow: hidden;white-space: nowrap;
@@ -1378,7 +1378,7 @@ ul.my_delivery{margin:20px 48px;}
 #resumeScore div.which span{cursor:pointer;margin: 0 0 0 150px;text-align: center;background: #019875; color: #fff;float:left;-webkit-transition: .2s;-moz-transition: .2s;transition: .2s;}
 #resumeScore div.which span:hover{background: #00694e; }
 #resumeScore div.which a{color:#fff;display:block;padding: 8px 40px;}
-.profile_box{clear:both;background: #fafafa;border:2px solid #fafafa;word-wrap:break-word; padding:18px; margin-bottom: 20px; position: relative;}
+.profile_box{clear:both;background: #fafafa;border:2px solid #fafafa;word-wrap:break-word; padding:5px;position: relative;}
 .profile_box td{vertical-align: top;}
 .profile_box span.error{margin:3px 0 0 0;}
 .profile_box h2{font-size: 18px;font-weight: 600;margin:0 0 10px 0; background: url('../../img/profile_square.png') 0 3px no-repeat; padding-left: 20px;}
@@ -1390,9 +1390,10 @@ ul.my_delivery{margin:20px 48px;}
 .profile_box td{padding:8px 0 8px 20px;}
 #basicInfo{min-height:116px;}
 #basicInfo .basicEdit{overflow: hidden;padding:0;}
-#basicInfo .basicShow{font-size:16px;padding:0 130px 0 20px; line-height: 28px; position: relative;}
+#basicInfo .basicShow{font-size:15px;padding:0 130px 0 20px; line-height: 28px; position: relative;}
+#basicInfo .basicShow span{float:left;width:260px;position:relative;}
 #basicInfo .basicShow span.nofill{color:#e46a4a;}
-#basicInfo .basicShow .m_portrait{position: absolute;right: 0; top: -35px;}
+#basicInfo .basicShow .m_portrait{position: absolute;right: 45px; top: -5px;}
 #expectJob .expectShow{font-size:16px;padding:0 40px 0 20px; position: relative;}
 #expectJob .c_edit{right: 7px;top: 7px;}
 #expectJob{*z-index:30;}

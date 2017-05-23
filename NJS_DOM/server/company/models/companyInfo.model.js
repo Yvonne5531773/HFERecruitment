@@ -28,6 +28,12 @@ var CompanyInfoSchema = new Schema({
     tele: {
         type: String, default: '', trim: true
     },
+    link: {
+        type: String, default: '', trim: true
+    },
+    recuritmentlink: {
+        type: String, default: '', trim: true
+    },
     company: [{
         type: Schema.Types.ObjectId, ref: 'Company'
     }],
