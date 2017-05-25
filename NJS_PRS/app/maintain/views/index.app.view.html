@@ -43,7 +43,7 @@
 			<!-- Sidebar Menu -->
 			<aside class="main-sidebar">
 				<ul class="sidebar-menu">
-					{% if userInfo.role == '管理' %}
+					{% if userInfo.role == '管理'&& userInfo.company == '珠海华发教育产业投资控股有限公司' %}
 					<li>
 						<a ui-sref="userManagement">
 							<i class="fa fa-users"></i>
@@ -94,7 +94,7 @@
 							<!--</span>-->
 						<!--</a>-->
 					<!--</li>-->
-					{% if userInfo.role == '管理'%}
+					{% if userInfo.role == '管理' && userInfo.company == '珠海华发教育产业投资控股有限公司' %}
 					<li ui-sref-active="active">
 						<a ui-sref="dictionary">
 							<i class="fa fa-book"></i>
