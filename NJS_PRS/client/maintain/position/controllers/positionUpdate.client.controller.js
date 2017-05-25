@@ -6,7 +6,7 @@
 function positionEditInit(instance, $scope) {
     $scope.allPositionTypes = Array.prototype.concat('', instance.allPositionTypes);
     $scope.allWelfareTypes = instance.allWelfareTypes;
-    $scope.allCertificateTypes = ['','不限','大专','本科','硕士','博士'];
+    $scope.allCertificateTypes = ['','不限','大专及以上','本科及以上','硕士及以上','博士及以上'];
     $scope.allExperiences = ['','不限','应届毕业生','1年以下','1-3年','3-5年','5-10年','10年以上'];
     $scope._simpleConfig = {
         //这里可以选择自己需要的工具按钮名称,此处仅选择如下五个
@@ -65,6 +65,7 @@ angular.module('position').controller('PositionUpdate', ['instance', '$scope', '
         DictionaryService.getDictionarys({category:{'$in':['用人单位-本部','用人单位-幼稚园','用人单位-小学',
             '用人单位-中学','用人单位-高中','用人单位-培训学校',]}}, function(err, result){
             if(result.data) {
+                $scope.dictionarys = result.data;
                 $scope.workAddrs = Array.prototype.concat('', result.data.map(function (data) {
                     return data.value;
                 }));
@@ -90,6 +91,9 @@ angular.module('position').controller('PositionUpdate', ['instance', '$scope', '
                 updateOtherPositions($scope.position);
                 instance.refreshForCreateOrUpdate(null);
                 postionAssembler($scope.position);
+                $scope.position.dictionary = (_.filter($scope.dictionarys,function(data){
+                    return data.value===$scope.position.workAddr
+                }))[0]._id;
                 PositionService.upsertPosition($scope.position, function(err, data){
                     if(err){
                         toaster.pop('error', TIP_UPDATE_FAILED);
@@ -104,7 +108,6 @@ angular.module('position').controller('PositionUpdate', ['instance', '$scope', '
         function updateOtherPositions(position){
             vm.criteria = {};
             PositionService.getPositions(vm.criteria, function(err, results){
-                debugger;
                 var positionList = results.data;
                 var isExist = false;
                 if (positionList !=null && positionList.length>0){

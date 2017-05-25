@@ -36,8 +36,6 @@ function checkApplicant(criteria, callback) {
         uri: config.url.dom + util.format('/api/applicant/checkApplicant'),
         json: criteria
     }, function (error, response, result) {
-        console.log('in checkApplicant response.statusCode',response.statusCode)
-        console.log('in checkApplicant result',result)
         if (response.statusCode == 200){
             if (!_.isEmpty(result)) {
                 callback(null, result);

@@ -30,8 +30,11 @@ angular.module('position').controller('PositionController', PositionController);
         const NOT_PUBLISH = "未发布";
 
         $scope.getPositionForSelectShow = function(){
-            PositionService.getPositions(vm.criteria, function(err, data){
-                $scope.selectForShow = data.data;
+            var userInfo = JSON.parse($cookies.get('USER_INFO'));
+            var criteria = {};
+            if(userInfo.company !== '珠海华发教育产业投资控股有限公司') criteria.workAddr = userInfo.company;
+            PositionService.getPositions(criteria, function(err, data){
+                $scope.selectForShow = _.unionBy(data.data, 'name');
             });
         };
         $scope.getPositionForSelectShow();
@@ -55,7 +58,7 @@ angular.module('position').controller('PositionController', PositionController);
             enableColumnResizing: true,
             enableGridMenu: true,
             paginationPageSizes: [9, 50, 75],
-            paginationPageSize: 9,
+            paginationPageSize: 20,
             //enableRowHeaderSelection: true,
             //enableRowSelection: true,
             enableFullRowSelection: true,
@@ -116,7 +119,7 @@ angular.module('position').controller('PositionController', PositionController);
         $scope.getData = function(){
             var userInfo = JSON.parse($cookies.get('USER_INFO'));
             var criteria = {};
-            if(userInfo.company !== '华发教育公司') criteria.company = userInfo.company;
+            if(userInfo.company !== '珠海华发教育产业投资控股有限公司') criteria.workAddr = userInfo.company;
             PositionService.getPositions(criteria, function(err, res){
                 if(res.data){
                     res.data.forEach(function (position) {
@@ -207,7 +210,6 @@ angular.module('position').controller('PositionController', PositionController);
             if($scope.gridApi.grid.selection.selectedCount != 1){
                 toaster.pop('error', TIP_ONLY_ONE_ROW_SELECT);
             }else{
-                //console.log($scope.gridApi.grid.selection.lastSelectedRow.entity);
                 instance.applicantEntity = $scope.gridApi.grid.selection.lastSelectedRow.entity;
                 $uibModal.open({
                     templateUrl: 'client/maintain/position/views/positionTemplate.html',
@@ -404,6 +406,8 @@ angular.module('position').controller('PositionController', PositionController);
             if(_.isDate(fromDate) && !_.isDate(toDate)){
                 criteria.updated = {$gte: fromDate};
             }
+            var userInfo = JSON.parse($cookies.get('USER_INFO'));
+            if(userInfo.company !== '珠海华发教育产业投资控股有限公司') criteria.workAddr = userInfo.company;
             PositionService.getPositions(criteria, function(err, res){
                 if(res){
                     if(!_.isEmpty(res.data)) {
@@ -415,6 +419,7 @@ angular.module('position').controller('PositionController', PositionController);
                             });
                             position.welfareForShow = position.welfare.join(',');
                             position.welfare = welfaresObjs;
+                            position.negotiable = position.negotiable?'是':'否';
                             var updateDate = convertGMTtoDate(position.updated);
                             var month = updateDate.getMonth() < 10 ? '0' + updateDate.getMonth() : updateDate.getMonth();
                             var day = updateDate.getDate() < 10 ? '0' + updateDate.getDate() : updateDate.getDate();

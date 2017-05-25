@@ -14,7 +14,7 @@ module.exports.publish = function (req, res) {
         return res.end();
     }
     positions.forEach(function(p){
-        positionSchema.update({_id : p._id}, {$set:{status:ACTIVE,updated:new Date()}})
+        positionSchema.update({_id : p._id}, {$set:{status:'已发布',updated:new Date()}})
             .exec(function(err,result) {
                 res.end();
             });
@@ -28,7 +28,7 @@ module.exports.stopPublish = function (req, res) {
         return res.end();
     }
     positions.forEach(function(p){
-        positionSchema.update({_id : p._id}, {$set:{status:INACTIVE,updated:new Date()}})
+        positionSchema.update({_id : p._id}, {$set:{status:'未发布',updated:new Date()}})
             .exec(function(err,result) {
                 res.end();
             });

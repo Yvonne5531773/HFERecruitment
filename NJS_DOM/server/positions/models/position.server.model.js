@@ -71,7 +71,7 @@ var PositionSchema = new Schema({
         type : Number, default : 0
     },
     successMessage : {
-        type : String, default : '申请成功/我们将稍后联系你'
+        type : String, default : '谢谢您的关注，诚邀您参与面试'
     },
     nature: {
         type: String, default:''
@@ -84,6 +84,9 @@ var PositionSchema = new Schema({
     },
     negotiable:{
         type: Boolean, default: false
+    },
+    dictionary: {
+        type: Schema.Types.ObjectId, ref: 'Dictionary'
     }
 });
 

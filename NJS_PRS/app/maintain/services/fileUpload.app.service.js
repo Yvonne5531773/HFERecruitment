@@ -11,7 +11,6 @@ var http = require('http');
 var image = require('images');
 
 exports.fileUpload = function(data, callback){
-    console.log('in fileUpload data',data)
     var obj = {},
         saveName = '',
         thumbName = '',
@@ -37,7 +36,6 @@ exports.fileUpload = function(data, callback){
             url: util.format('/api/v1/Upfile'),
             json: obj
         }, function (error, response, result) {
-            console.log('in fileUpload result', result)
             if(error) callback(error, null);
             if (result) {
                 callback(null, result);
@@ -53,7 +51,6 @@ exports.getUpfiles = function(criteria, callback){
         uri: config.url.dom + util.format('/api/v1/Upfile?query=%s&sort=-_id', encodeURIComponent(JSON.stringify(criteria))),
         json: true
     }, function (error, response, upfiles) {
-        console.log('in getUpfiles upfiles', upfiles)
         if (!error && (response.statusCode == 200)) {
             if (_.isEmpty(upfiles)) {
                 callback(error, null);

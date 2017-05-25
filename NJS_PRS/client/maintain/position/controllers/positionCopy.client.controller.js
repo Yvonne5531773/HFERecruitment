@@ -66,7 +66,7 @@ angular.module('position').controller('PositionCopy', ['instance', '$scope', '$h
             if(isValid){
                 postionAssembler($scope.position);
                 $scope.position._id = null;
-                $scope.position.status = 'INACTIVE';
+                $scope.position.status = '未发布';
                 $scope.position.applyCount = 0;
                 $scope.position.browseCount = 0;
                 PositionService.upsertPosition($scope.position, function(err, data){

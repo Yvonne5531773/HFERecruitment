@@ -38,6 +38,9 @@ var LoginuserSchema = new Schema({
     },
     company: {
         type: String
+    },
+    dictionary: {
+        type: Schema.Types.ObjectId, ref: 'Dictionary'
     }
 });
 

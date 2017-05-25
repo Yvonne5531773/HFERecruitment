@@ -30,7 +30,6 @@ module.exports.getUpfiles = function (req, res, next) {
 
 module.exports.deleteUpfiles = function (req, res, next) {
     var upfiles = req.body;
-    console.log('in fileUpload upfiles', upfiles)
     fileUploadService.deleteUpfiles(upfiles, function(err, result){
         if (err) {
             return res.status(400).json(err);

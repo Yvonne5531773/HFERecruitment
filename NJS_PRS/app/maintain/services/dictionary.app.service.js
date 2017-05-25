@@ -67,7 +67,6 @@ function upsertDictionary(dictionary, callBackFn){
 }
 
 function deleteDictionary(dictionaryId, callBackFn){
-    console.log('in deleteDictionary')
     request.del({
         baseUrl: config.url.dom,
         url: util.format('/api/v1/Dictionary/%s', dictionaryId),

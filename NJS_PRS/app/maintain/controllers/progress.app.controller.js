@@ -34,7 +34,6 @@ function upsertProgress(req, res, next){
 }
 
 function sendInterviewByEmail(req, res, next){
-    console.log('in sendInterviewByEmail req.body',req.body)
     var transporter = nodemailer.createTransport(config.transport),
         mailOptions = config.mailOptions,
         link = config.url.prs + req.body.link;
@@ -46,7 +45,6 @@ function sendInterviewByEmail(req, res, next){
     mailOptions.html += req.body.content?'<span>'+req.body.content+'</span>':'';
     mailOptions.html += '<h2>参与面试请点击链接:</h2>' +
         '<h3><a href=' + link + '>' + link;
-    console.log('in sendInterviewByEmail mailOptions.html',mailOptions.html)
     transporter.sendMail(mailOptions, function (err, info) {
         if (err) {
             return res.json({err:'邮件发送失败'});

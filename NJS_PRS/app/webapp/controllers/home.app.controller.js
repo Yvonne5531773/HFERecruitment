@@ -72,22 +72,32 @@ function show(req, res, next){
                 ],
                 function(err, result){
                     companyInfoService.getCompanyInfos({},function(err, companyInfos) {
+                        var companyShows = result.allWorkAddrs.centrals.concat(result.allWorkAddrs.preschools).concat(result.allWorkAddrs.primaryschools)
+                            .concat(result.allWorkAddrs.middleschools).concat(result.allWorkAddrs.highschools).concat(result.allWorkAddrs.trainschools)
                         _.forEach(companyInfos, function(companyInfo){
                             _.forEach(result.result, function(res){
                                 if(companyInfo.type === res.workAddr){
                                     res.companyInfo = companyInfo;
                                 }
                             })
+                            _.forEach(companyShows, function(companyShow){
+                                if(companyInfo.type === companyShow.value){
+                                    companyShow.companyId = companyInfo._id;
+                                    companyShow.icon = companyInfo.icon;
+                                    companyShow.address = companyInfo.address;
+                                }
+                            })
                         });
+                        companyShows = _.sortBy(companyShows, 'sort')
                         res.render('./app/webapp/views/home', {
-                            positions: result.result,
+                            positions: result.result.length>7?result.result.slice(0,7):result.result,
                             positionGroup: result.positionGroup,
                             conditionIndex: true,
                             applicant: applicant,
                             conditionHot: !conditionNew,
                             conditionNew: conditionNew,
-                            companyInfoFs: companyInfos.splice(0, 6),
-                            companyInfoSs: companyInfos.length>6?companyInfos.splice(6, 12):[],
+                            companyInfoFs: companyShows.length>12?companyShows.splice(0,12):companyShows,
+                            // companyInfoSs: companyInfos.length>=6&&companyInfos.length<=12?companyInfos.splice(6):[],
                             allWorkAddrs: result.allWorkAddrs,
                             showWorkAddrs: result.allWorkAddrs.centrals.concat(result.allWorkAddrs.preschools)
                                 .concat(result.allWorkAddrs.primaryschools).concat(result.allWorkAddrs.middleschools)

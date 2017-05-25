@@ -4,7 +4,7 @@ module.exports = {
   app: {
     title: 'NJS_PRS'
   },
-  port: process.env.PORT || 3001,
+  port: process.env.PORT || 80,
   host: process.env.HOST || '0.0.0.0',
   staticPath: './public',
   viewPath: './',

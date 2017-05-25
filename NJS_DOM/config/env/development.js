@@ -3,7 +3,7 @@
 module.exports = {
     db: {
         //uri: process.env.MONGOHQ_URL || process.env.MONGOLAB_URI || 'mongodb://' + (process.env.DB_1_PORT_27017_TCP_ADDR || 'localhost') + '/welfare',
-        uri: 'mongodb://HFJYLZH-PC:27017/recruitment-dev',
+        uri: 'mongodb://localhost:27017/recruitment',
         options: {
             user: '',
             pass: ''

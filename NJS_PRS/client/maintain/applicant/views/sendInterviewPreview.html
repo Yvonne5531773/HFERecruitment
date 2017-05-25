@@ -28,13 +28,13 @@
         </div>
         <div id="emailText">
             <!--{{preview}}-->
-            {{data.resume.name}}, 您好: <br/>
+            {{data.resume.name}}, 您好, <br/>
             {{data.successMessage}}<br /><br />
             面试时间: {{data.interviewTime}}<br />
             面试地点: {{data.positionCompanyLocation}}<br />
             <span ng-if="data.contact">联系人: {{data.contact}}<br /></span>
             联系电话: {{data.contactPhone}}<br />
-            <span ng-if="data.link">参与面试请点击：{{data.link}}</span><br />
+            <span ng-if="data.link">如有意参与面试请点击链接：{{data.link}}</span><br />
             <span ng-if="data.content">{{data.content}}</span>
         </div>
     </div>

@@ -17,7 +17,7 @@ angular.module("userManagement").controller("userController", ['$scope', '$http'
         enableColumnResizing: true,
         enableGridMenu: true,
         paginationPageSizes: [9, 50, 75],
-        paginationPageSize: 9,
+        paginationPageSize: 20,
         //enableRowHeaderSelection: true,
         //enableRowSelection: true,
         enableFullRowSelection: true,
@@ -87,7 +87,7 @@ angular.module("userManagement").controller("userController", ['$scope', '$http'
     $scope.loadUserData = function () {
         var userInfo = JSON.parse($cookies.get('USER_INFO'));
         var criteria = {};
-        if(userInfo.company !== '华发教育公司') criteria.company = userInfo.company;
+        if(userInfo.company !== '珠海华发教育产业投资控股有限公司') criteria.company = userInfo.company;
         UserService.findUsers(criteria, function (err, data) {
             if (err) {
                 console.log(err);
@@ -303,6 +303,7 @@ angular.module('userManagement').controller('userCreate', ['instance', '$scope',
         DictionaryService.getDictionarys({category:{'$in':['用人单位-本部','用人单位-幼稚园','用人单位-小学',
             '用人单位-中学','用人单位-高中','用人单位-培训学校',]}}, function(err, result){
             if(result.data) {
+                $scope.dictionarys = result.data;
                 $scope.allCompanies = result.data.map(function (data) {
                     return data.value;
                 });
@@ -329,6 +330,9 @@ angular.module('userManagement').controller('userCreate', ['instance', '$scope',
                 $scope.user.updatedBy = userInfo.userid;
                 $scope.user.created = new Date();
                 $scope.user.updated = new Date();
+                $scope.user.dictionary = (_.filter($scope.dictionarys,function(data){
+                    return data.value===$scope.user.company
+                }))[0]._id;
                 /*var url = '/api/user';
                 $http.post(url, $scope.user).success(function (data) {
                     $uibModalInstance.close('ok');
@@ -415,6 +419,7 @@ angular.module('userManagement').controller('userUpdate', ['instance', '$scope',
         DictionaryService.getDictionarys({category:{'$in':['用人单位-本部','用人单位-幼稚园','用人单位-小学',
             '用人单位-中学','用人单位-高中','用人单位-培训学校',]}}, function(err, result){
             if(result.data) {
+                $scope.dictionarys = result.data;
                 $scope.allCompanies = result.data.map(function (data) {
                     return data.value;
                 });
@@ -432,6 +437,9 @@ angular.module('userManagement').controller('userUpdate', ['instance', '$scope',
                 $scope.user.userid = $scope.user.userid.toLowerCase();
                 $scope.user.updatedBy = userInfo.userid;
                 $scope.user.updated = new Date();
+                $scope.user.dictionary = (_.filter($scope.dictionarys,function(data){
+                    return data.value===$scope.user.company
+                }))[0]._id;
                 /*var url = '/api/user';
                 $http.post(url, $scope.user).success(function (data) {
                     $uibModalInstance.close('ok');

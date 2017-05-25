@@ -3,7 +3,7 @@
 module.exports = {
   url :{
     dom : 'http://localhost:3000',
-    prs: 'http://192.168.150.51:3001',
+    prs: 'http://14.21.32.178',
     h5: {
       host: 'lica4-w7',
       url: 'http://lica4-w7:3300/#/scene/create/',
@@ -28,7 +28,7 @@ module.exports = {
   mailOptions: {
       from: '524294223@qq.com', // 发送者
       // to: 'lzh5531773@hotmail.com', // 接受者,可以同时发送多个,以逗号隔开
-      subject: 'nodemailer2.5.0邮件发送', // 标题
+      subject: '华发教育招聘系统邮件', // 标题
       // html: '<h2>华发教育:</h2>' +
       // '<h3><a href="http://blog.csdn.net/zzwwjjdj1/article/details/524294223">http://blog.csdn.net/zzwwjjdj1/article/details/524294223</a></h3>',
       // attachments: [{

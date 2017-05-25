@@ -23,27 +23,27 @@
 				{% if resume.nation %}<span >民族：{{resume.nation}}</span>{% endif %}
 				{% if resume.birthed %}<span >出生日期：{{resume.birthed}}</span>{% endif %}
 				{% if resume.politic %}<span >政治面貌：{{resume.politic}}</span>{% endif %}
+				{% if resume.health %}<span >身体状况：{{resume.health}}</span>{% endif %}
 				{% if resume.firstdegree %}<span >第一学历：{{resume.firstdegree}}</span>{% endif %}
 				{% if resume.highdegree %}<span >最高学历：{{resume.highdegree}}</span>{% endif %}
-				{% if resume.currentsalary %}<span >目前年薪：{{resume.currentsalary}}</span>{% endif %}
-				{% if resume.expectsalary %}<span >最高年薪：{{resume.expectsalary}}</span>{% endif %}
-				{% if resume.weight %}<span >体重：{{resume.weight}}cm</span>{% endif %}
 				{% if resume.height %}<span >身高：{{resume.height}}kg</span>{% endif %}
+				{% if resume.weight %}<span >体重：{{resume.weight}}cm</span>{% endif %}
 				{% if resume.married %}<span >婚姻状况：{{resume.married}}</span>{% endif %}
 				{% if resume.child %}<span >子女状况：{{resume.child}}</span>{% endif %}
+				{% if resume.origin %}<span>籍贯：{{resume.origin}}</span>{% endif %}
+				{% if resume.domicile %}<span>现户籍地：{{resume.domicile}}</span>{% endif %}
+				{% if resume.experience&&resume.experience==='应届毕业生'%}<span>工作经验：{{resume.experience}}</span>{% endif %}
+				{% if resume.experience&&resume.experience!=='应届毕业生' %}<span >工作经验：{{resume.experience}}</span>{% endif %}
+				{% if resume.status %}<span>目前状态：{{resume.status}}</span>{% endif %}
+				{% if resume.workunit %}<span>最近工作单位：{{resume.workunit}}</span>{% endif %}
+				{% if resume.post %}<span>最近工作职务：{{resume.post}}</span>{% endif %}
+				{% if resume.currentsalary %}<span >目前年薪：{{resume.currentsalary}}万元人民币</span>{% endif %}
+				{% if resume.expectsalary %}<span >期望年薪：{{resume.expectsalary}}万元人民币</span>{% endif %}
 				{% if resume.phone %}<span >手机：{{resume.phone}}</span>{% endif %}
 				{% if resume.email %}<span >邮箱：{{resume.email}}</span>{% endif %}
-				{% if resume.health %}<span >身体状况：{{resume.health}}</span>{% endif %}
+				{% if resume.address %}<span>通讯地址：{{resume.address}}</span>{% endif %}
 				{% if resume.idCard %}<span >身份证：{{resume.idCard}}</span>{% endif %}
-				{% if resume.experience==='应届毕业生'%}<span>工作经验：{{resume.experience}}</span>{% endif %}
-				{% if resume.experience!=='应届毕业生' %}<span >工作经验：{{resume.experience}}</span>{% endif %}
-				{% if resume.address %}<span ng-if="resume.address">通讯地址：{{resume.address}}</span>{% endif %}
-				{% if resume.workunit %}<span ng-if="resume.workunit">最近工作单位：{{resume.workunit}}</span>{% endif %}
-				{% if resume.post %}<span ng-if="resume.post">最近工作职务：{{resume.post}}</span>{% endif %}
-				{% if resume.origin %}<span ng-if="resume.origin">籍贯：{{resume.origin}}</span>{% endif %}
-				{% if resume.domicile %}<span ng-if="resume.domicile">现户籍地：{{resume.domicile}}</span>{% endif %}
-				{% if resume.status %}<span ng-if="resume.status">目前状态：{{resume.status}}</span>{% endif %}
-				{% if resume.honor %}<span ng-if="resume.honor">最高荣誉：{{resume.honor}}</span>{% endif %}
+				{% if resume.honor %}<span>最高荣誉：{{resume.honor}}</span>{% endif %}
 				<div class="m_portrait">
 					<img src="../../../{{resume.icon}}" alt="{{resume.resumename}}" height="120" width="120">
 				</div>
@@ -79,6 +79,9 @@
 								<h3>{{vo.company}}</h3>
 								<h4>{{vo.position}}</h4>
 							</div>
+							<h5>
+								{{vo.description}}
+							</h5>
 						</li>
 					{% endfor %}
 				</ul>
@@ -96,7 +99,6 @@
 						<div class="projectList">
 							<div class="f16 mb10">{{vo.name}}，{{vo.position}}
 								<span class="c9">（{{vo.yearStart}}.{{vo.monthStart}} - {{vo.yearEnd}}.{{vo.monthEnd}}）</span>
-								}
 							</div>
 							<div class="dl1">
 								{{vo.description}}

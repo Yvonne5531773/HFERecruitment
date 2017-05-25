@@ -117,14 +117,14 @@ span.error{display:block; margin:5px 0 10px 0; font-size:14px; color:#ff6a6a;tex
 
 /*index content*/
 .content{ width:744px; float:right;}
-.da-thumbs {list-style: none;height:350px;	position: relative;	padding: 0;}
-.da-thumbs li {	float: left;margin-right:8px;background: #fff;position: relative;	border:2px solid #fafafa;}
+.da-thumbs {list-style: none;height:345px;	position: relative;	padding: 0;}
+.da-thumbs li {	float: left;margin-right:8px;background: #fff;position: relative;border:2px solid #fafafa;height:160px;margin-bottom:5px}
 .da-thumbs li.last{margin-right:0;}
 .da-thumbs li a,.da-thumbs li a img {display: block;position: relative;}
 .da-thumbs li a {color:#fff;overflow: hidden;}
 .da-thumbs li a div {position: absolute;background: #333;background: rgba(1,152,117,0.9);*background:#0d9572;background:#0d9572\0;filter:alpha(Opacity=90);	width: 100%;height: 100%;}
 .da-thumbs li a em{display:block;width:100px;height:5px;background:rgba(255,255,255,0.3);*background:#fff;background:#fff\0;filter:alpha(Opacity=30);margin:0 6px;}
-.da-thumbs li a h2{font-size:16px;height:24px;line-height:24px;margin:10px 8px 8px 8px;font-weight:normal;text-align:center;overflow:hidden;}
+.da-thumbs li a h2{font-size:13px;height:64px;line-height:24px;margin:10px 8px 8px 8px;font-weight:normal;text-align:center;overflow:hidden;}
 .da-thumbs li a p{font-size:12px;margin:6px 8px;line-height:18px;}
 ul.hot_tags{margin-bottom:23px; overflow:hidden;}
 .hot_tags li{float:left; font-size:16px;}
@@ -1113,7 +1113,7 @@ a.greylink{ color:#555;font-size:18px; margin-right:60px;text-decoration:underli
 .delivery_tabs{	background:#e9f2ee;	padding:10px 0;}
 .delivery_tabs ul{background:#fff;margin:0 48px;border-bottom:1px solid #d8d8d8;font-size: 0;}
 .delivery_tabs li{padding:9px 0 5px 0;*padding:9px 0 9px 0;display:inline-block;*display:inline;*zoom:1;}
-.delivery_tabs li a{display:block;*display:inline;padding:3px 21px;font-size:16px;line-height:22px;color:#777;border-right:1px solid #d8d8d8;}
+.delivery_tabs li a{display:block;*display:inline;padding:3px 21px;font-size:16px;line-height:22px;color:#777;}
 .delivery_tabs li.last a{width:55px;border-right:none;}
 .delivery_tabs li.current{border-bottom:4px solid #019875;}
 .delivery_tabs li.current a,.delivery_tabs li:hover a{color:#019875;}
@@ -1459,7 +1459,7 @@ ul.my_delivery{margin:20px 48px;}
 #worksShow .workEdit{padding:0 0 0 20px;}
 #worksShow .workShow li a{color: #019875; text-decoration: underline;}
 #worksShow .workShow p{margin:5px 0 0 0;}
-#selfDescription .descriptionShow, #strength .strengthShow, #prize .prizeShow,#remark .remarkShow{color:#777;padding: 0 20px; position: relative;}
+#selfDescription .descriptionShow, #strength .strengthShow, #prize .prizeShow,#remark .remarkShow{color:#333;padding: 0 20px; position: relative;}
 .mycenterR{background:#fafafa;padding:15px 20px;margin-bottom:8px}
 .mycenterR h2{font-weight:600;font-size:18px;margin:0 0 8px 0}
 .mycenterR h2 a,.mycenterR h2 span{cursor:pointer;font-size:14px;line-height:26px;float:right;color:#019875;text-decoration:none;*margin-top:-25px;}

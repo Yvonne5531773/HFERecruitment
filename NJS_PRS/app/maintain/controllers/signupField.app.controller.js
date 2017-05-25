@@ -25,7 +25,6 @@ function findFields(req, res, next) {
 };
 
 function findSignupFields(req, res, next){
-    console.log('prs.app.signupcontroller');
     var criteria = req.body;
     signupFieldService.findSignupFields(criteria, function(err, datas){
         if (err) {
@@ -50,7 +49,6 @@ function upsertSignupField(req, res, next){
 }
 
 function deleteSignupField(req, res, next){
-    console.log(req.body);
     var fieldId = req.body.fieldId;
     signupFieldService.deleteSignupField(fieldId, function(err, result){
         if (err) {

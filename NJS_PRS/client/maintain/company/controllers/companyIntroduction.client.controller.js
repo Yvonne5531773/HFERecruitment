@@ -19,18 +19,20 @@
         $scope.currentUser = JSON.parse($cookies.get('USER_INFO'))?JSON.parse($cookies.get('USER_INFO')):{};
         $scope.segmentType.value = !_.isEmpty(localStorage.getItem('segmentTypeVal'))? localStorage.getItem('segmentTypeVal') : $scope.currentUser.company;
         $scope.loadData = function () {
-            localStorage.setItem('segmentTypeVal', $scope.segmentType.value);
-            CompanyService.getCompanyInfos({'type': $scope.segmentType.value}, function(err, companyIntroductions){
-                if(!err){
-                    if(!_.isEmpty(companyIntroductions.data)) {
-                        $scope.companyInfo = companyIntroductions.data[0];
-                        $scope.companyIntroductions = _.sortBy($scope.companyInfo.company, function(item){return item.sequence});
-                    }else{
-                        $scope.companyInfo = {};
-                        $scope.companyIntroductions = [];
+            if(!_.isEmpty($scope.segmentType)){
+                localStorage.setItem('segmentTypeVal', $scope.segmentType.value);
+                CompanyService.getCompanyInfos({'type': $scope.segmentType.value}, function(err, companyIntroductions){
+                    if(!err){
+                        if(!_.isEmpty(companyIntroductions.data)) {
+                            $scope.companyInfo = companyIntroductions.data[0];
+                            $scope.companyIntroductions = _.sortBy($scope.companyInfo.company, function(item){return item.sequence});
+                        }else{
+                            $scope.companyInfo = {};
+                            $scope.companyIntroductions = [];
+                        }
                     }
-                }
-            })
+                })
+            }
         };
 
         $scope.createCompanyIntroduction = function () {
@@ -189,7 +191,7 @@
             '用人单位-中学','用人单位-高中','用人单位-培训学校',]}}, function(err, result){
             if(result.data) {
                 $scope.allSegmentTypes = _.filter(result.data,function(data){
-                    return data.value===$scope.currentUser.company||$scope.currentUser.company==='华发教育公司'
+                    return data.value===$scope.currentUser.company||$scope.currentUser.company==='珠海华发教育产业投资控股有限公司'
                 })
                 $scope.allSegmentTypeVals = $scope.allSegmentTypes.map(function (data) {
                     return data.value;

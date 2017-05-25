@@ -60,9 +60,6 @@ function jobShow(req, res, next){
         ],
         function(err, result){
             if(!err) {
-                console.log('in jobShow applied1',!_.isEmpty(applicant)?applicant.applied:null)
-                console.log('in jobShow applied3',!_.isEmpty(applicant)?_.indexOf(_.map(applicant.applied, function(p){
-                        if(p.position) return p.position._id}),_id):-1)
                 res.render('./app/webapp/views/job', {
                     position: result.position,
                     companyInfo: result.companyInfo,
@@ -92,7 +89,6 @@ function apply(req, res, next){
                     ++positions[0].applyCount;
                     positionService.upsertPosition(positions[0],function(err,data){if(err) next(err)});
                 });
-                console.log('in apply create applicant',applicant)
                 applicantService.create(applicant, function (err, result) {
                     if (err) {
                         return res.json({error: err});
@@ -197,7 +193,6 @@ function collectShow(req, res, next){
     var applicant = req.session.applicant,
         collects = _.orderBy(applicant.collected, ['position.updated'], ['desc']),
         applies = _.filter(applicant.applied, function(a){return a.position});
-    console.log('in collectShow applicant',applicant)
     collects = _.filter(collects, function(c){return c.position});
     if(!_.isEmpty(applicant) && !_.isEmpty(collects)){
         async.waterfall(

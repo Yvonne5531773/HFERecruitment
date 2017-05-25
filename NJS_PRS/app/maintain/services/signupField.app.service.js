@@ -13,7 +13,6 @@ exports.upsertSignupField = upsertSignupField;
 exports.deleteSignupField = deleteSignupField;
 
 function findSignupFields(criteria, callBackFn) {
-    console.log('prs.app.signupservice');
     request.get({
         uri: config.url.dom + util.format('/api/v1/signupfield?query=%s', encodeURIComponent(JSON.stringify(criteria))),
         json: true
@@ -67,7 +66,6 @@ function upsertSignupField(field, callBackFn){
 }
 
 function deleteSignupField(fieldId, callBackFn){
-    console.log(fieldId);
     request.del({
         baseUrl: config.url.dom,
         url: util.format('/api/v1/signupfield/%s', fieldId),

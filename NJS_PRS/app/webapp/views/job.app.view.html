@@ -33,7 +33,11 @@
                                 <a {% if collected==-1 %} class="jd_collection" {% else %} class="jd_collection collected" {% endif %}></a>
                             </dt>
                             <dd class="job_request">
-                                <span class="red">{{position.salaryLow}}k-{{position.salaryHigh}}k</span><br/>
+                                {% if position.negotiable %}
+                                    <span class="red">面议</span><br/>
+                                {% else %}
+                                    <span class="red">{{position.salaryLow}}k-{{position.salaryHigh}}k</span><br/>
+                                {% endif %}
                                 <span>{{position.city}}</span>
                                 <span>{{position.experience}}</span>
                                 <span>{{position.certificate}}</span>

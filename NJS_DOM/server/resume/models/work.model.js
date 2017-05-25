@@ -32,6 +32,9 @@ var WorkSchema = new Schema({
     },
     monthEnd: {
         type: String
+    },
+    description: {
+        type: String, default: ''
     }
 });
 

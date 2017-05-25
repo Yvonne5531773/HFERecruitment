@@ -27,6 +27,9 @@ var ApplicantSchema = new Schema({
     updated: {
         type: Date, default: Date.now
     },
+    isValidate: {
+        type: Boolean, default: false
+    },
     resume: {
         type: Schema.Types.ObjectId, ref: 'Resume'
     },

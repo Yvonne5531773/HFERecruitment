@@ -66,32 +66,33 @@
 					<h2>基本信息</h2>
 					<span class="c_edit"></span>
 					<div class="basicShow">
-						<span style="width: 1000px;margin-bottom: 20px">
-							{% if resume.name %} {{resume.name}} {% endif %}
-							{% if resume.gender %} | {{resume.gender}} {% endif %}
-							{% if resume.nation %} | {{resume.nation}} {% endif %}
-							{% if resume.birthed %} | {{resume.birthed}}<br> {% endif %}
-							{% if resume.origin %}  籍贯 {{resume.origin}} {% endif %}
-							{% if resume.experience %} | {{resume.experience}} {% endif %}
-							{% if resume.domicile %} | {{resume.domicile}} {% endif %}
-							{% if resume.politic %} | {{resume.politic}}<br> {% endif %}
-							{% if resume.firstdegree %}{{resume.firstdegree}} {% endif %}
-							{% if resume.highdegree %} | {{resume.highdegree}} {% endif %}
-							{% if resume.currentsalary %} | {{resume.currentsalary}} {% endif %}
-							{% if resume.expectsalary %} | {{resume.expectsalary}}<br> {% endif %}
-							{% if resume.phone %} {{resume.phone}} {% endif %}
-							{% if resume.idCard %} | {{resume.idCard}} {% endif %}
-							{% if resume.email %} | {{resume.email}}<br> {% endif %}
-							{% if resume.address %} {{resume.address}}<br> {% endif %}
-							{% if resume.workunit %} {{resume.workunit}} {% endif %}
-							{% if resume.post %} | {{resume.post}} {% endif %}
-							{% if resume.status %} | {{resume.status}}<br> {% endif %}
-							{% if resume.height %} 身高{{resume.height}}cm {% endif %}
-							{% if resume.weight %} | 体重{{resume.weight}}kg {% endif %}
-							{% if resume.married %} | {{resume.married}} {% endif %}
-							{% if resume.child %} | {{resume.child}} {% endif %}
-							{% if resume.health %} | 身体状况 {{resume.health}} {% endif %}
-							{% if resume.honor %} | {{resume.honor}} {% endif %}
+						<span style="width: 650px;margin-bottom: 20px">
+							{% if resume.name %}<span>姓名：{{resume.name}} </span>{% endif %}
+				{% if resume.gender %}<span>性别：{{resume.gender}}</span>{% endif %}
+				{% if resume.nation %}<span >民族：{{resume.nation}}</span>{% endif %}
+				{% if resume.birthed %}<span >出生日期：{{resume.birthed}}</span>{% endif %}
+				{% if resume.politic %}<span >政治面貌：{{resume.politic}}</span>{% endif %}
+				{% if resume.health %}<span >身体状况：{{resume.health}}</span>{% endif %}
+				{% if resume.firstdegree %}<span >第一学历：{{resume.firstdegree}}</span>{% endif %}
+				{% if resume.highdegree %}<span >最高学历：{{resume.highdegree}}</span>{% endif %}
+				{% if resume.height %}<span >身高：{{resume.height}}kg</span>{% endif %}
+				{% if resume.weight %}<span >体重：{{resume.weight}}cm</span>{% endif %}
+				{% if resume.married %}<span >婚姻状况：{{resume.married}}</span>{% endif %}
+				{% if resume.child %}<span >子女状况：{{resume.child}}</span>{% endif %}
+				{% if resume.origin %}<span>籍贯：{{resume.origin}}</span>{% endif %}
+				{% if resume.domicile %}<span>现户籍地：{{resume.domicile}}</span>{% endif %}
+				{% if resume.experience&&resume.experience==='应届毕业生'%}<span>工作经验：{{resume.experience}}</span>{% endif %}
+				{% if resume.experience&&resume.experience!=='应届毕业生' %}<span >工作经验：{{resume.experience}}</span>{% endif %}
+				{% if resume.status %}<span>目前状态：{{resume.status}}</span>{% endif %}
+				{% if resume.workunit %}<span>最近工作单位：{{resume.workunit}}</span>{% endif %}
+				{% if resume.post %}<span>最近工作职务：{{resume.post}}</span>{% endif %}
+				{% if resume.currentsalary %}<span >目前年薪：{{resume.currentsalary}}万元人民币</span>{% endif %}
+				{% if resume.expectsalary %}<span >期望年薪：{{resume.expectsalary}}万元人民币</span>{% endif %}
+				{% if resume.phone %}<span >手机：{{resume.phone}}</span>{% endif %}
+				{% if resume.email %}<span >邮箱：{{resume.email}}</span>{% endif %}
+				{% if resume.address %}<span>通讯地址：{{resume.address}}</span>{% endif %}
+				{% if resume.idCard %}<span >身份证：{{resume.idCard}}</span>{% endif %}
+				{% if resume.honor %}<span>最高荣誉：{{resume.honor}}</span>{% endif %}
 						</span>
 						<div class="m_portrait">
 							<div></div>
@@ -285,13 +286,13 @@
 										<span class="redstar">*</span>
 									</td>
 									<td>
-										<input style="width: 230px;" type="text" placeholder="目前年薪" value="" name="currentsalary" id="currentsalary">
+										<input style="width: 230px;" type="text" placeholder="目前年薪(万元人民币)" value="" name="currentsalary" id="currentsalary">
 									</td>
 									<td valign="top">
 										<span class="redstar">*</span>
 									</td>
 									<td>
-										<input style="width: 230px;" type="text" placeholder="期望年薪" value="" name="expectsalary" id="expectsalary">
+										<input style="width: 230px;" type="text" placeholder="期望年薪(万元人民币)" value="" name="expectsalary" id="expectsalary">
 									</td>
 								</tr>
 								<tr>
@@ -301,7 +302,7 @@
 									</td>
 									<td valign="top"> </td>
 									<td>
-										<input style="width: 230px;" name="post" id="post" type="text" placeholder="职务" onclick="funtypeSelect_2(1)" class="profile_select_normal"/>
+										<input style="width: 230px;" name="post" id="post" type="text" placeholder="职务" class="profile_select_normal"/>
 									</td>
 								</tr>
                                 <tr>
@@ -570,11 +571,11 @@
 									</td>
 									<td>
 										<ul class="education_radio clearfix reset">
-											<li class="current" style="width: 50px">
+											<li class="current" style="width: 80px">
 												全日制<em></em>
 												<input type="radio" checked="checked" name="nature" value='全日制'>
 											</li>
-											<li style="width: 60px">
+											<li style="width: 80px">
 												非全日制<em></em>
 												<input type="radio" name="nature" value='非全日制'>
 											</li>
@@ -612,7 +613,8 @@
 					<div class="experienceShow">
 						<form class="experienceForm borderBtm dn">
 							<table>
-								<tbody><tr>
+								<tbody>
+								<tr>
 									<td valign="top">
 										<span class="redstar">*</span>
 									</td>
@@ -683,6 +685,12 @@
 									</td>
 								</tr>
 								<tr>
+									<td valign="top"></td>
+									<td colspan="3">
+										<textarea class="experienceDescription s_textarea" name="experienceDescription" placeholder="工作职责"></textarea>
+									</td>
+								</tr>
+								<tr>
 									<td></td>
 									<td colspan="3">
 										<input type="submit" value="保 存" class="btn_profile_save">
@@ -709,6 +717,9 @@
 										{{work.position}}
 									</h4>
 								</div>
+								<h5 data-description="{{work.description}}">
+									{{work.description}}
+								</h5>
 							</li>
 							{% endfor %}
 						</ul>
@@ -716,7 +727,8 @@
 					<div class="experienceEdit dn">
 						<form class="experienceForm">
 							<table>
-								<tbody><tr>
+								<tbody>
+								<tr>
 									<td valign="top">
 										<span class="redstar">*</span>
 									</td>
@@ -787,6 +799,12 @@
 									</td>
 								</tr>
 								<tr>
+									<td valign="top"></td>
+									<td colspan="3">
+										<textarea class="experienceDescription s_textarea" name="experienceDescription" placeholder="工作职责"></textarea>
+									</td>
+								</tr>
+								<tr>
 									<td></td>
 									<td colspan="3">
 										<input type="submit" value="保 存" class="btn_profile_save">
@@ -799,93 +817,6 @@
 					</div>
 					<div {% if resume.work.length==0 %} class = "experienceAdd pAdd" {%else%}class = "experienceAdd pAdd dn" {% endif %}>
 						<span>添加工作经历，从最近工作开始</span>
-					</div>
-				</div>
-
-				<div class="profile_box" id="family">
-					<h2>家庭成员</h2>
-					<span {% if resume.family.length<=0 %} class = "c_add dn" {%else%}class = "c_add" {% endif %}></span>
-					<div class="familyShow">
-						<ul class="flist clearfix">
-							{% for family in resume.family %}
-							<li data-id="{{family._id}}">
-								<div class="familyList">
-									<i class="sm_del dn"></i>
-									<i class="sm_edit dn"></i>
-									<div class="f16 mb10 fixed_width" data-name="{{family.name}}" data-relation="{{family.relation}}"
-										 data-company="{{family.company}}" data-position="{{family.position}}"
-										 data-domicile="{{family.domicile}}">{{family.name}}，{{family.company}}，{{family.position}}
-										<span class="c9">（{{family.relation}}）</span>
-									</div>
-									<div class="dl1">
-										{{family.domicile}}
-									</div>
-								</div>
-							</li>
-							{% endfor %}
-						</ul>
-					</div>
-					<div class="familyEdit dn">
-						<form class="familyForm">
-							<table>
-								<tbody>
-								<tr>
-									<td valign="top">
-										<span class="redstar">*</span>
-									</td>
-									<td>
-										<input type="text" placeholder="姓名" name="name" id="name">
-									</td>
-									<td valign="top">
-										<span class="redstar">*</span>
-									</td>
-									<td>
-										<input type="button" value="" name="relation" id="relation" class="profile_select_190 profile_select_normal select_relation">
-										<div class="boxUpDown boxUpDown_190 dn" id="box_relation" style="display: none;">
-											<ul>
-												<li>父子</li>
-												<li>母子</li>
-												<li>配偶</li>
-												<li>兄妹</li>
-												<li>姐妹</li>
-												<li>叔侄</li>
-												<li>婆媳</li>
-											</ul>
-										</div>
-									</td>
-								</tr>
-								<tr>
-									<td valign="top"><span class="redstar">*</span></td>
-									<td>
-										<input type="text" placeholder="工作单位" value="" name="company" id="company">
-									</td>
-									<td valign="top"><span class="redstar">*</span></td>
-									<td>
-										<input name="position" id="position" type="text" placeholder="职务"/>
-									</td>
-								</tr>
-								<tr>
-									<td valign="top">
-										<span class="redstar">*</span>
-									</td>
-									<td>
-										<input name="domicile" id="domicile" type="text" placeholder="现户籍地" onclick="fdomicileSelect()" />
-									</td>
-								</tr>
-								<tr>
-									<td valign="top"></td>
-									<td colspan="3">
-										<input type="submit" value="保 存" class="btn_profile_save">
-										<a class="btn_profile_cancel" href="javascript:;">取 消</a>
-									</td>
-								</tr>
-								</tbody>
-							</table>
-							<input type="hidden" value="" class="familyId">
-						</form>
-					</div>
-					<div {% if resume.family.length==0 %} class = "familyAdd pAdd" {%else%}class = "familyAdd pAdd dn" {% endif %}>
-						<span>添加家庭成员</span>
 					</div>
 				</div>
 
@@ -915,7 +846,8 @@
 					<div class="projectEdit dn">
 						<form class="projectForm">
 							<table>
-								<tbody><tr>
+								<tbody>
+								<tr>
 									<td valign="top">
 										<span class="redstar">*</span>
 									</td>
@@ -1032,7 +964,6 @@
 													<li value="04">职称证书</li>
 													<li value="05">教师证书</li>
 													<li value="06">其他证书</li>
-													<li value="00">自定义</li>
 												</ul>
 											</div>
 										</div>
@@ -1042,8 +973,8 @@
 									</td>
 									<td>
 										<div class="fl">
-											<input style="width:410px;height:46px;" type="text" placeholder="证书等级" name="certificateNature" class="certificateNatureText dn">
-											<input type="button" placeholder="证书等级" name="certificateNature" class="profile_select_410 profile_select_normal certificateNature">
+											<input style="width:410px;height:46px;" type="text" placeholder="证书名称及等级" name="certificateNature" class="certificateNatureText">
+											<!--<input type="button" placeholder="证书等级" name="certificateNature" class="profile_select_410 profile_select_normal certificateNature">-->
 											<div class="box_certificateNature boxUpDown boxUpDown_410 dn" style="display: none;">
 											</div>
 										</div>
@@ -1095,21 +1026,21 @@
 						</form>
 						<ul class="clist clearfix">
 							{% for cert in resume.certificate %}
-								<li data-id="{{cert._id}}">
-									<i class="sm_del"></i>
-									<i class="sm_edit"></i>
-									<span class="c9" data-gotYear="{{cert.gotYear}}" data-gotMonth="{{cert.gotMonth}}">
+							<li data-id="{{cert._id}}">
+								<i class="sm_del"></i>
+								<i class="sm_edit"></i>
+								<span class="c9" data-gotYear="{{cert.gotYear}}" data-gotMonth="{{cert.gotMonth}}">
 										{{cert.gotYear}}.{{cert.gotMonth}}
 									</span>
-									<div>
-										<h3 data-name="{{cert.name}}">
-											{{cert.name}}
-										</h3>
-										<h4 data-nature="{{cert.nature}}">
-											{{cert.nature}}
-										</h4>
-									</div>
-								</li>
+								<div>
+									<h3 data-name="{{cert.name}}">
+										{{cert.name}}
+									</h3>
+									<h4 data-nature="{{cert.nature}}">
+										{{cert.nature}}
+									</h4>
+								</div>
+							</li>
 							{% endfor %}
 						</ul>
 					</div>
@@ -1132,7 +1063,6 @@
 													<li value="04">职称证书</li>
 													<li value="05">教师证书</li>
 													<li value="06">其他证书</li>
-													<li value="00">自定义</li>
 												</ul>
 											</div>
 										</div>
@@ -1142,8 +1072,8 @@
 									</td>
 									<td>
 										<div class="fl">
-											<!--<input style="width:410px;height:46px;" type="text" placeholder="证书等级" name="certificateNature" class="certificateNatureText dn">-->
-											<input type="button" placeholder="证书等级" name="certificateNature" class="profile_select_410 profile_select_normal certificateNature">
+											<input style="width:410px;height:46px;" type="text" placeholder="证书名称及等级" name="certificateNature" class="certificateNatureText">
+											<!--<input type="button" placeholder="证书等级" name="certificateNature" class="profile_select_410 profile_select_normal certificateNature">-->
 											<div class="box_certificateNature boxUpDown boxUpDown_410 dn" style="display: none;">
 											</div>
 										</div>
@@ -1194,37 +1124,7 @@
 						</form>
 					</div>
 					<div {% if resume.certificate.length==0 %} class = "certificateAdd pAdd" {%else%}class = "certificateAdd pAdd dn" {% endif %}>
-						<span>添加证书等级</span>
-					</div>
-				</div>
-
-				<div class="profile_box" id="strength">
-					<h2>特长技能</h2>
-					<span class="c_edit"></span>
-					<div class="strengthShow">
-						{{resume.strength}}
-					</div>
-					<div class="strengthEdit dn">
-						<form class="strengthForm">
-							<table>
-								<tbody>
-								<tr>
-									<td colspan="2">
-										<textarea class="strength s_textarea" name="strength" placeholder=""></textarea>
-										<div style="margin-top: 5px;" class="word_count">你还可以输入 <span>500</span> 字</div>
-									</td>
-								</tr>
-								<tr>
-									<td colspan="2">
-										<input type="submit" value="保 存"  class="btn_profile_save">
-										<a class="btn_profile_cancel" href="javascript:;">取 消</a>
-									</td>
-								</tr>
-								</tbody></table>
-						</form>
-					</div>
-					<div {% if resume.strength %} class = "strengthAdd pAdd dn" {%else%}class = "strengthAdd pAdd" {% endif %}>
-						<span>添加特长技能</span>
+						<span>添加证书等级，从最近开始</span>
 					</div>
 				</div>
 
@@ -1255,6 +1155,123 @@
 					</div>
 					<div {% if resume.prize %} class = "prizeAdd pAdd dn" {%else%}class = "prizeAdd pAdd" {% endif %}>如：获奖项、技能资格证书、专利等
 						<span>添加奖惩情况</span>
+					</div>
+				</div>
+
+				<div class="profile_box" id="family">
+					<h2>家庭成员</h2>
+					<span {% if resume.family.length<=0 %} class = "c_add dn" {%else%}class = "c_add" {% endif %}></span>
+					<div class="familyShow">
+						<ul class="flist clearfix">
+							{% for family in resume.family %}
+							<li data-id="{{family._id}}">
+								<div class="familyList">
+									<i class="sm_del dn"></i>
+									<i class="sm_edit dn"></i>
+									<div class="f16 mb10 fixed_width" data-name="{{family.name}}" data-relation="{{family.relation}}"
+										 data-company="{{family.company}}" data-position="{{family.position}}"
+										 data-domicile="{{family.domicile}}">{{family.name}}，{{family.company}}，{{family.position}}
+										<span class="c9">（{{family.relation}}）</span>
+									</div>
+									<div class="dl1">
+										{{family.domicile}}
+									</div>
+								</div>
+							</li>
+							{% endfor %}
+						</ul>
+					</div>
+					<div class="familyEdit dn">
+						<form class="familyForm">
+							<table>
+								<tbody>
+								<tr>
+									<td valign="top">
+										<span class="redstar">*</span>
+									</td>
+									<td>
+										<input type="text" placeholder="姓名" name="name" id="name">
+									</td>
+									<td valign="top">
+										<span class="redstar">*</span>
+									</td>
+									<td>
+										<input type="button" value="" name="relation" id="relation" class="profile_select_190 profile_select_normal select_relation">
+										<div class="boxUpDown boxUpDown_190 dn" id="box_relation" style="display: none;">
+											<ul>
+												<li>父子</li>
+												<li>母子</li>
+												<li>配偶</li>
+												<li>兄妹</li>
+												<li>姐妹</li>
+												<li>叔侄</li>
+												<li>婆媳</li>
+											</ul>
+										</div>
+									</td>
+								</tr>
+								<tr>
+									<td valign="top"><span class="redstar">*</span></td>
+									<td>
+										<input type="text" placeholder="工作单位" value="" name="company" id="company">
+									</td>
+									<td valign="top"><span class="redstar">*</span></td>
+									<td>
+										<input name="position" id="position" type="text" placeholder="职务"/>
+									</td>
+								</tr>
+								<tr>
+									<td valign="top">
+										<span class="redstar">*</span>
+									</td>
+									<td>
+										<input name="domicile" id="domicile" type="text" placeholder="现户籍地" onclick="fdomicileSelect()" />
+									</td>
+								</tr>
+								<tr>
+									<td valign="top"></td>
+									<td colspan="3">
+										<input type="submit" value="保 存" class="btn_profile_save">
+										<a class="btn_profile_cancel" href="javascript:;">取 消</a>
+									</td>
+								</tr>
+								</tbody>
+							</table>
+							<input type="hidden" value="" class="familyId">
+						</form>
+					</div>
+					<div {% if resume.family.length==0 %} class = "familyAdd pAdd" {%else%}class = "familyAdd pAdd dn" {% endif %}>
+						<span>添加家庭成员</span>
+					</div>
+				</div>
+
+				<div class="profile_box" id="strength">
+					<h2>特长技能</h2>
+					<span class="c_edit"></span>
+					<div class="strengthShow">
+						{{resume.strength}}
+					</div>
+					<div class="strengthEdit dn">
+						<form class="strengthForm">
+							<table>
+								<tbody>
+								<tr>
+									<td colspan="2">
+										<textarea class="strength s_textarea" name="strength" placeholder=""></textarea>
+										<div style="margin-top: 5px;" class="word_count">你还可以输入 <span>500</span> 字</div>
+									</td>
+								</tr>
+								<tr>
+									<td colspan="2">
+										<input type="submit" value="保 存"  class="btn_profile_save">
+										<a class="btn_profile_cancel" href="javascript:;">取 消</a>
+									</td>
+								</tr>
+								</tbody></table>
+						</form>
+					</div>
+					<div {% if resume.strength %} class = "strengthAdd pAdd dn" {%else%}class = "strengthAdd pAdd" {% endif %}>
+						<span>添加特长技能</span>
 					</div>
 				</div>
 
@@ -1370,6 +1387,14 @@
 	<div id="footer">
 		<div class="wrapper">
 			<a rel="nofollow" target="_blank" href="http://www.zhhfedu.com/">联系我们</a>
+			<a class="footer_qr" href="javascript:void(0)" rel="nofollow">
+				微信二维码
+				<i>
+				</i>
+			</a>
+			<a href="http://www.rhschool.cn/xxb/NewsList.aspx?colid=133" target="_blank" rel="nofollow">
+				珠海容闳学校招聘网
+			</a>
 		</div>
 	</div>
 	<div id="maskLayer" style="display:none">

@@ -67,39 +67,49 @@ function create(req, res, next) {
 };
 
 function register(req, res, next) {
-    console.log('in register ')
     var transporter = nodemailer.createTransport(config.transport),
         mailOptions = config.mailOptions,
-        link = config.url.prs + util.format('/applicant/register/validateAndCreate?username=%s', req.body.email);
+        link;
     mailOptions.to = req.body.email;
-    mailOptions.html = '<h2>华发教育招聘，用户注册验证链接:</h2>' +
-    '<h3><a href=' + link + '>' + link;
-    console.log('in register mailOptions.html',mailOptions.html)
-    transporter.sendMail(mailOptions, function (err, info) {
+    applicantService.create({username:req.body.email,password:req.body.password}, function(err, result){
         if (err) {
-            return res.json({err:'邮件发送失败'});
+            return res.json({err: err});
+        }else{
+            applicantService.checkUsername({username:req.body.email}, function(err, result){
+                if(!err && !_.isEmpty(result[0])){
+                    link = config.url.prs + util.format('/applicant/register/validateAndCreate?_id=%s', result[0]._id);
+                    mailOptions.html = '<h2>华发教育招聘，用户注册验证链接:</h2>' +
+                        '<h3><a href=' + link + '>' + link;
+                    transporter.sendMail(mailOptions, function (err, info) {
+                        if (err) {
+                            return res.json({err:'邮件发送失败'});
+                        }
+                        console.log('发送成功 info',info);
+                        return res.json(info);
+                    });
+                }
+            })
         }
-        req.session.preApplicant = {username:req.body.email,password:req.body.password};
-        console.log('in register req.session.preApplicant', req.session.preApplicant)
-        console.log('发送成功 info',info);
-        return res.json(info);
     });
 };
 
 function validateAndCreate(req, res, next) {
-    var params = url.parse(req.url).query,
-        preApplicant = req.session.preApplicant;
-    console.log('in validateAndCreate preApplicant',preApplicant)
-    if(preApplicant.username==qs.parse(params).username){
-        applicantService.create(preApplicant, function(err, result){
-            if (err) {
-                return res.json({message: err});
-            }else{
-                req.session.applicant = result;
-                res.redirect('/');
-            }
-        });
-    }
+    var params = url.parse(req.url).query;
+    applicantService.checkUsername({_id:qs.parse(params)._id}, function(err, result){
+        if (!err && !_.isEmpty(result[0])) {
+            result[0].isValidate = true;
+            applicantService.create(result[0], function(err, result){
+                if (err) {
+                    return res.json({message: err});
+                }else{
+                    req.session.applicant = result;
+                    res.redirect('/');
+                }
+            });
+        }else{
+            res.json({err:'验证失败'});
+        }
+    });
 };
 
 function login(req, res, next) {
@@ -108,7 +118,6 @@ function login(req, res, next) {
         if (err) {
             return res.json({error:err});
         }else if(!_.isEmpty(applicants)){
-            console.log('in login applicants', applicants[0].applied)
             req.session.applicant = applicants[0];
             return res.json({});
         }
@@ -124,7 +133,6 @@ function logout(req, res, next) {
 
 function getApplicants(req, res, next){
     applicantService.checkUsername(req.body, function(err, result){
-        console.log('in getApplicants result', result)
         if (err) {
             return res.json({message: err});
         }else{
@@ -232,7 +240,6 @@ function feedback(req, res, next){
             }else if(_.isEmpty(result)) return res.json({err: '出现错误，参与失败'});
             else{
                 result[0].feedback = true;
-                console.log('in feedback result[0]',result[0])
                 progressService.upsertProgress(result[0], function(err, applicant){
                     if (err) {
                         return res.json({err: err});

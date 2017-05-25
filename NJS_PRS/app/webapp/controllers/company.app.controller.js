@@ -82,7 +82,6 @@ function showCompany(req, res, next){
             function(obj, callback) {
                 if(!_.isEmpty(obj)) {
                     indexService.index({query:{workAddr: obj.type},sort:{updated:-1}}, function (err, positions) {
-                        console.log('in showCompany positions',positions)
                         if (!_.isEmpty(positions)) {
                             _.forEach(positions, function (position) {
                                 position.updated = moment(position.updated).format('YYYY-MM-DD');

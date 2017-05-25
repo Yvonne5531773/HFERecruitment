@@ -53,7 +53,7 @@
                     success: function(progresses) {
                         if(progresses){
                             progresses.forEach(function(data){
-                                if(scope.userInfo.company==='华发教育公司'||scope.userInfo.company===data.position.workAddr) {
+                                if(scope.userInfo.company==='珠海华发教育产业投资控股有限公司'||scope.userInfo.company===data.position.workAddr) {
                                     var event = {};
                                     event.title = data.resume.name + '的面试, 职位：' + data.position.name + '(' + data.position.workAddr + ')';
                                     event.start = data.interviewTime;

@@ -7,7 +7,7 @@ angular.module('applicant').controller('ApplicantController', ['$scope', '$http'
     function ($scope, $http, $uibModal, i18nService, instance, $q, $log, PositionService, DictionaryService, ApplicantService,$cookies) {
 
     var vm = $scope.vm = {};
-    vm.collapsed = true;
+    vm.collapsed = false;
     i18nService.setCurrentLang("zh-cn");
     $scope.applicants = [];
     $scope.myAppScopeProvider = {
@@ -20,11 +20,11 @@ angular.module('applicant').controller('ApplicantController', ['$scope', '$http'
                         row.entity.resume.data = $scope.gridApi.grid.selection.lastSelectedRow.entity;
                         row.entity.resume.icon = row.entity.resume.icon ? row.entity.resume.icon : "images/applicant_default.png";
                         row.entity.resume.birthed = !_.isEmpty(row.entity.resume.birthed)?getOperationTimeWithouthour(row.entity.resume.birthed):null;
-                        // ApplicantService.getProgress({applicant:row.entity._id, position:row.entity.positionId}, function(err, result){
-                        //     if(_.isEmpty(result.data))
-                        //         ApplicantService.upsertProgress({applicant: row.entity._id,position:row.entity.positionId,
-                        //             viewed: new Date()}, function(err, data){});
-                        // })
+                        ApplicantService.getProgress({applicant:row.entity._id, position:row.entity.positionId}, function(err, result){
+                            if(_.isEmpty(result.data))
+                                ApplicantService.upsertProgress({applicant: row.entity._id,position:row.entity.positionId,
+                                    viewed: new Date()}, function(err, data){});
+                        })
                         return row.entity.resume;
                     }
                 }
@@ -37,7 +37,10 @@ angular.module('applicant').controller('ApplicantController', ['$scope', '$http'
         }
     }
     $scope.getPositionForSelectShow = function(){
-        PositionService.getPositions(vm.criteria, function(err, data){
+        var userInfo = JSON.parse($cookies.get('USER_INFO'));
+        var criteria = {};
+        if(userInfo.company !== '珠海华发教育产业投资控股有限公司') criteria.workAddr = userInfo.company;
+        PositionService.getPositions(criteria, function(err, data){
             $scope.selectForShow = _.unionBy(data.data, 'name');
         });
     };
@@ -51,7 +54,7 @@ angular.module('applicant').controller('ApplicantController', ['$scope', '$http'
         enableColumnResizing: true,
         enableGridMenu: true,
         paginationPageSizes: [25, 50, 75],
-        paginationPageSize: 25,
+        paginationPageSize: 20,
         enableRowHeaderSelection: false,
         enableRowSelection: true,
         enableFullRowSelection:true,
@@ -75,7 +78,7 @@ angular.module('applicant').controller('ApplicantController', ['$scope', '$http'
                             applicant.resume = resume.data;
                             applicant.applied.forEach(function(apply){
                                 if(!_.isEmpty(apply.position)) {
-                                    if(userInfo.company==='华发教育公司'||userInfo.company===apply.position.workAddr){
+                                    if(userInfo.company==='珠海华发教育产业投资控股有限公司'||userInfo.company===apply.position.workAddr){
                                         ApplicantService.getProgress({applicant:applicant._id, position:apply.position._id}, function(err, result){
                                             data = {};
                                             data._id = applicant._id;
@@ -89,7 +92,7 @@ angular.module('applicant').controller('ApplicantController', ['$scope', '$http'
                                             data.applytime = getOperationTime(apply.time);
                                             data.firstEducation = getFirstEducation(applicant.resume.education);
                                             data.highEducation = getHighEducation(applicant.resume.education);
-                                            if(!_.isEmpty(result.data))
+                                            if(!_.isEmpty(result.data)&&result.data[0].interviewTime)
                                                 data.feedback = result.data[0].feedback?'确定参与':'未参与';
                                             $scope.myData.data.push(data);
                                             $scope.applicants.push(data);
@@ -374,7 +377,7 @@ angular.module('applicant').controller('SendInterviewController', ['instance', '
                             var progress = {};
                             progress._id=result.data[0]._id,progress.applicant= $scope.data._id,progress.position=$scope.data.positionId,
                                 progress.accepted=new Date(),progress.interviewTime=$scope.data.interviewTime,progress.resume=$scope.data.resume._id,
-                                progress.interviewAddress=$scope.data.positionCompanyLocation,progress.link = $scope.data.link;
+                                progress.interviewAddress=$scope.data.positionCompanyLocation,progress.link=$scope.data.link,progress.contactPhone=$scope.data.contactPhone;
                             ApplicantService.upsertProgress(progress, function(err, data){
                                 if(!err){
                                     progress.toEmail=$scope.data.resume.email;
@@ -393,6 +396,8 @@ angular.module('applicant').controller('SendInterviewController', ['instance', '
                                     })
                                 }
                             });
+                        }else{
+                            toaster.pop('error', '发送失败，请重试');
                         }
                     });
                 }

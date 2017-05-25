@@ -15,6 +15,9 @@ var DictionarySchema = new Schema({
   },
   icon : {
     type : String, require : false
+  },
+  sort : {
+    type : Number, require : false
   }
 });
 

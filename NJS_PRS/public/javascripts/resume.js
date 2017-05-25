@@ -623,7 +623,7 @@ function file_check(obj,action_url,id) {
                     },
                     messages: {
                         certificateName: {required: "请选择证书类型"},
-                        certificateNature: {required: "请选择证书等级"},
+                        certificateNature: {required: "请填写证书等级"},
                         certificateYear: {required: "请选择获取年份"},
                         certificateMonth: {required: "请选择获取月份"}
                     },
@@ -636,8 +636,7 @@ function file_check(obj,action_url,id) {
                             certificateMonth = $('input[name="certificateMonth"]', a).val(),
                             _id = $(".certificateId", a).val(),
                             certificateNature;
-                        if(certificateName==='自定义') certificateNature = $('.certificateNatureText', a).val();
-                        else certificateNature = $('.certificateNature', a).val();
+                        certificateNature = $('.certificateNatureText', a).val();
                         $(a).find(":submit").val("保存中...").attr("disabled", !0);
                         $.ajax({
                             url: "/resume/upsertCertificate",
@@ -1344,6 +1343,7 @@ function file_check(obj,action_url,id) {
                     d = a.siblings("span").attr("data-endYear"),
                     e = a.siblings("span").attr("data-startMonth"),
                     f = a.siblings("span").attr("data-endMonth"),
+                    description = a.siblings("h5").attr("data-description"),
                     h = a.parent("li").find("h3").text().trim(),
                     i = a.parent("li").find("h4").text().trim();
                 this.obj.children(".experienceShow").find(".companyName").val(h),
@@ -1357,6 +1357,7 @@ function file_check(obj,action_url,id) {
                     this.obj.children(".experienceShow").find(".companyMonthEnd").val(f),
                     this.obj.children(".experienceShow").find(".select_companyMonthEnd").css("color", "#333").val(f),
                     this.obj.children(".experienceShow").find(".expId").val(b),
+                    this.obj.children(".experienceShow").find(".experienceDescription").val(description),
                     this.obj.children(".experienceShow").children(".experienceForm").show(),
                 "至今" == $.trim(f) && this.obj.children(".experienceShow").find(".select_companyMonthEnd").unbind("click"),
                     this.companyNameVal = i, this.positionNameVal = h, this.companyYearStartVal = c, this.companyMonthStartVal = e, this.companyYearEndVal = d, this.companyMonthEndVal = f, this.obj.children(".c_add").addClass("dn"), j(this.obj)
@@ -1429,7 +1430,8 @@ function file_check(obj,action_url,id) {
                         required: function () {
                             return "至今" == $(".companyYearEnd").val() ? !1 : !0
                         }, checkWorkYear: !0
-                    }
+                    },
+                    experienceDescription: {required: !1}
                 },
                 messages: {
                     companyName: {required: "请输入有效的公司名称", maxlenStr: "请输入有效的公司名称"},
@@ -1453,6 +1455,7 @@ function file_check(obj,action_url,id) {
                         f = $('input[name="companyMonthStart"]', a).val(),
                         g = $('input[name="companyYearEnd"]', a).val(),
                         h = $('input[name="companyMonthEnd"]', a).val(),
+                        experienceDescription = "工作职责" != $('textarea[name="experienceDescription"]', a).val() ? $('textarea[name="experienceDescription"]', a).val() : "",
                         i = $(".expId", a).val()
                     $(a).find(":submit").val("保存中...").attr("disabled", !0);
                     $.ajax({
@@ -1465,6 +1468,7 @@ function file_check(obj,action_url,id) {
                             monthStart: f,
                             yearEnd: g,
                             monthEnd: h,
+                            description: experienceDescription,
                             _id: i
                         },
                         dataType: "json"
@@ -1484,7 +1488,7 @@ function file_check(obj,action_url,id) {
                                     }else {
                                         d += '<li data-id="' + wo[e]._id + '">'
                                     }
-                                    d += '<i class="sm_del dn"></i><i class="sm_edit dn"></i><span class="c9" data-startYear="' + wo[e].yearStart + '" data-endYear="' + wo[e].yearEnd + '" data-startMonth = "' + wo[e].monthStart + '" data-endMonth = "' + wo[e].monthEnd + '">' + wo[e].yearStart+'.'+wo[e].monthStart + "-" + wo[e].yearEnd+'.'+wo[e].monthEnd + "</span>" + "<h3>" + wo[e].company + "</h3>" + "<h4>" + wo[e].position + "</h4>" + "</div>" + "</li>";
+                                    d += '<i class="sm_del dn"></i><i class="sm_edit dn"></i><span class="c9" data-startYear="' + wo[e].yearStart + '" data-endYear="' + wo[e].yearEnd + '" data-startMonth = "' + wo[e].monthStart + '" data-endMonth = "' + wo[e].monthEnd + '">' + wo[e].yearStart+'.'+wo[e].monthStart + "-" + wo[e].yearEnd+'.'+wo[e].monthEnd + "</span>" + "<h3>" + wo[e].company + "</h3>" + "<h4>" + wo[e].position + "</h4>" + "</div>" + '<h5 data-description="' + wo[e].description + '">' + wo[e].description + "</h5>" + "</li>";
                                 }
                                 work.obj.children(".c_add").removeClass("dn");
                                 work.obj.children(".experienceShow").children(".experienceForm").hide();
@@ -1656,15 +1660,15 @@ function file_check(obj,action_url,id) {
             $(this).parents(".box_certificateName").hide();
             c = $(this).parents(".certificateForm");
             $(this).parents(".box_certificateName").siblings(".certificateName").hasClass("error") && $(this).parents(".certificateForm").validate().element(c.find(".certificateName"));
-            if(this.value==0) {
-                $(".certificateNatureText").removeClass('dn');
-                $(".certificateNature").addClass('dn');
-            }
-            else {
-                $(".certificateNatureText").addClass('dn');
-                $(".certificateNature").removeClass('dn');
-                $(".box_certificateNature").html(certificate_child(this.value));
-            }
+            // if(this.value==0) {
+            //     $(".certificateNatureText").removeClass('dn');
+            //     $(".certificateNature").addClass('dn');
+            // }
+            // else {
+            //     $(".certificateNatureText").addClass('dn');
+            //     $(".certificateNature").removeClass('dn');
+            //     $(".box_certificateNature").html(certificate_child(this.value));
+            // }
         })
         $("#certificate").on("click", ".certificateNature", function (a) {
             a.stopPropagation(), $(".profile_select_normal").removeClass("select_focus"), $(".boxUpDown").hide(), $(this).addClass("select_focus"), $(this).siblings(".box_certificateNature").show()
@@ -2204,7 +2208,7 @@ function file_check(obj,action_url,id) {
                         if(res.strength){
                             strength.text = res.strength;
                             strength.obj.children(".c_edit").removeClass("dn");
-                            strength.obj.children(".strengthShow").html(res.strength).removeClass("dn");
+                            strength.obj.children(".strengthShow").html(res.strength).removeClass("dn").css("color", "#333");
                             strength.obj.children(".strengthEdit").addClass("dn");
                         }else{
                             strength.text = "";
@@ -2278,7 +2282,7 @@ function file_check(obj,action_url,id) {
                         if(res.prize){
                             prize.text = res.prize;
                             prize.obj.children(".c_edit").removeClass("dn");
-                            prize.obj.children(".prizeShow").html(res.prize).removeClass("dn");
+                            prize.obj.children(".prizeShow").html(res.prize).removeClass("dn").css("color", "#333");
                             prize.obj.children(".prizeEdit").addClass("dn");
                         }else{
                             prize.text = "";
@@ -2356,7 +2360,7 @@ function file_check(obj,action_url,id) {
                         if(res.remark){
                             remark.text = res.remark;
                             remark.obj.children(".c_edit").removeClass("dn");
-                            remark.obj.children(".remarkShow").html(res.remark).removeClass("dn");
+                            remark.obj.children(".remarkShow").html(res.remark).removeClass("dn").css("color", "#333");
                             remark.obj.children(".remarkEdit").addClass("dn");
                         }else{
                             remark.text = "";

@@ -31,12 +31,13 @@
 <script type="text/javascript">
     $('.login_check #email').blur(function(){
         $.post('/login/checkUsername',{'email':$('.login_check #email').val()},function(obj){
-            if(obj){
-                $('.login_check #email').next().html('');
-            }else{
+            if(obj[0] && !obj[0].isValidate){
+                $('.login_check #email').next().css({display:'block',color:'red'});
+                $('.login_check #email').next().html('用户名未激活');
+            }else if(!obj[0]){
                 $('.login_check #email').next().css({display:'block',color:'red'});
                 $('.login_check #email').next().html('用户名不存在');
-            }
+            }else $('.login_check #email').next().html('');
         });
     });
     $('.login_check .submitLogin').click(function(){
@@ -44,20 +45,22 @@
             if(obj){
                 $.post('/login/checkApplicant',{'email':$('.login_check #email').val(),'password':$('.login_check #password').val()},function(result){
                     if(!result.message){
-                        $('.login_check #password').next().html('');
-                        $.cookie('applicant', result.username, { expires: 1/24 });
-                        $.ajax({
-                            url: "/applicant/login",
-                            type: "POST",
-                            data: {email: $('.login_check #email').val()},
-                            dataType: "json"
-                        }).done(function (res) {
-                            if (!res.error) {
-                                var val = $('.locationIndex').val();
-                                if($('.locationIndex').val()==='3') location.href='/resume';
-                                else location.href='/index';
-                            }
-                        });
+                        if(result && result.isValidate){
+                            $('.login_check #password').next().html('');
+                            $.cookie('applicant', result.username, { expires: 1/24 });
+                            $.ajax({
+                                url: "/applicant/login",
+                                type: "POST",
+                                data: {email: $('.login_check #email').val()},
+                                dataType: "json"
+                            }).done(function (res) {
+                                if (!res.error) {
+                                    var val = $('.locationIndex').val();
+                                    if($('.locationIndex').val()==='3') location.href='/resume';
+                                    else location.href='/index';
+                                }
+                            });
+                        }else alert('用户名未激活')
                     }else{
                         $('.login_check #password').next().css({display:'block',color:'red'});
                         $('.login_check #password').next().html(result.message);

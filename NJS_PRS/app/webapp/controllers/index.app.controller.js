@@ -21,7 +21,6 @@ exports.getSuggest = getSuggest;
 function index(req, res, next){
     var params = url.parse(req.url).query,
         applicant = req.session.applicant? req.session.applicant:{};
-    console.log('in index params', params)
     req.session.search = req.session.search? req.session.search : {};
     req.session.search_c = req.session.search_c? req.session.search_c : {};
     if(!_.isEmpty(qs.parse(params).salary)){

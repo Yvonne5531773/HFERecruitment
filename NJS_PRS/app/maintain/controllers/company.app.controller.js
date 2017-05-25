@@ -30,7 +30,6 @@ function upsertCompany(req, res, next){
             logger.error(err);
             return res.json([]);
         }else{
-            console.log('in upsertCompany', result)
             companyInfo.company.push(result._id);
             companyInfoService.upsertCompanyInfo(companyInfo, function (err, result) {
                 if (err) {

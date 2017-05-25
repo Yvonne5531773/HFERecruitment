@@ -67,7 +67,6 @@ function create(userModel, callBackFn){
             User.findByIdAndUpdate(_id, {
                 $set: _.omit(userModel, '_id')
             }, function (err, doc) {
-                console.log('in create userModel err', err)
                 if (err) {
                      return callBackFn(err, null);
                 } else {
