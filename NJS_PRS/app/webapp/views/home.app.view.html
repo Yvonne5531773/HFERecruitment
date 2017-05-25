@@ -57,7 +57,9 @@
                         {% for vo in companyInfoFs %}
                         <li >
                             <a style="" href="/showCompany/{{vo.companyId}}" target="_blank">
-                                {% if vo.icon %}<img src="../../../{{vo.icon}}" width="110px" height="110px" alt="" />{% endif %}
+                                {% if vo.icon %}<img src="../../../{{vo.icon}}" width="110px" height="110px" alt="" />
+                                {% else %} <img src="../../../images/huafa.png" width="110px" height="110px" alt="" />
+                                {% endif %}
                                 <div class="hot_info">
                                     <h2 title="{{vo.value}}">{{vo.value}}</h2>
                                 </div>
