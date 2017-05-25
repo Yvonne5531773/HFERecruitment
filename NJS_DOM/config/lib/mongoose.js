@@ -58,7 +58,8 @@ module.exports.initLoginUser = function(){
         userid      : 'admin',
         accountType : 'local',
         role        : '管理',
-        password    : 'admin4'
+        password    : 'admin4',
+        company     : '珠海华发教育产业投资控股有限公司'
       });
       user.save(function (err) {
         if (err) {

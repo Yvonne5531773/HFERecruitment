@@ -85,10 +85,12 @@
                     <!--{% endif %}-->
                     <div class="breakline"></div>
 
+                    {% if positions.length > 0 %}
                     <ul class="reset hotabbing" id="check_position">
                         <li {% if conditionHot %} class="current"{% endif %} onclick="javascript:location.href='/'">热门职位</li>
                         <li {% if conditionNew %} class="current"{% endif %} onclick="javascript:location.href='/?index=1'">最新职位</li>
                     </ul>
+                    {% endif %}
 
                     <div id="hotList">
                         <ul class="hot_pos reset">
@@ -223,7 +225,7 @@
                                     </div>
                                 </li>
                             </foreach>
-                            <a href="/index" class="btn fr" target="_blank">查看更多</a>
+                            {% if positions.length > 0 %}<a href="/index" class="btn fr" target="_blank">查看更多</a>{% endif %}
                         </ul>
                     </div>
                     <div class="clear"></div>
