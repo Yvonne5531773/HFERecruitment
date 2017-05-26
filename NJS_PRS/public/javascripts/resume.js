@@ -550,7 +550,7 @@ function file_check(obj,action_url,id) {
                     },
                     messages: {
                         name: {required: "请输入名字", maxlenStr: "请输入有效的名字"},
-                        relation: {required: "请选择与本人关系"},
+                        relation: {required: "请填写与本人关系"},
                         company: {required: "请输入工作单位"},
                         position: {required: "请选择职务"},
                         domicile: {required: "请选择现户籍地"}
