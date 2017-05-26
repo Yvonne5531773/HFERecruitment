@@ -26,7 +26,7 @@ module.exports = {
     dir: 'public/images/uploads/'
   },
   mailOptions: {
-      from: '524294223@qq.com', // 发送者
+      from: 'zhhfjyhr@sina.com', // 发送者
       // to: 'lzh5531773@hotmail.com', // 接受者,可以同时发送多个,以逗号隔开
       subject: '华发教育招聘系统邮件', // 标题
       // html: '<h2>华发教育:</h2>' +
@@ -38,10 +38,10 @@ module.exports = {
       // }]
   },
   transport: {
-      service: 'qq',
+      host: 'smtp.sina.com',
       auth: {
-          user: '524294223@qq.com',
-          pass: 'hcovhmjtpmqmbiic' //授权码,通过QQ获取
+          user: 'zhhfjyhr@sina.com',
+          pass: 'Huafa0756' //授权码,通过QQ获取
       }
   }
 };

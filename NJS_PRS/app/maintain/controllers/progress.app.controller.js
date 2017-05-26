@@ -44,7 +44,7 @@ function sendInterviewByEmail(req, res, next){
     mailOptions.html += '联系电话: '+req.body.contactPhone+'<br />';
     mailOptions.html += req.body.content?'<span>'+req.body.content+'</span>':'';
     mailOptions.html += '<h2>参与面试请点击链接:</h2>' +
-        '<h3><a href=' + link + '>' + link;
+        '<h3><a href=' + link + '>' + link + '</a></h3>';
     transporter.sendMail(mailOptions, function (err, info) {
         if (err) {
             return res.json({err:'邮件发送失败'});
