@@ -3,7 +3,7 @@
 module.exports = {
   url :{
     dom : 'http://localhost:3000',
-    prs: 'http://14.21.32.178',
+    prs: 'http://14.21.32.178:3001',
     h5: {
       host: 'lica4-w7',
       url: 'http://lica4-w7:3300/#/scene/create/',
